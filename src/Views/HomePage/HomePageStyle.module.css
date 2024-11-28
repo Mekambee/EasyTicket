@@ -36,8 +36,10 @@
 .reportProblemContainer {
 	width: 100px;
 	height: 100px;
-	background-color: red;
 	position: absolute;
 	left: 90%;
 	top: 80%;
+}
+.reportProblemContainer p {
+	font-size: 15px;
 }

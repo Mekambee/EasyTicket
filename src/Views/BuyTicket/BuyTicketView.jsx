@@ -1,13 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./BuyTicketStyle.module.css";
+import TopBarComponent from "../../Components/TopBar/TopBarComponent";
+import TicketCardComponent from "../../Components/TicketCard/TicketCardComponent";
 import { Link } from "react-router-dom";
 
-export default function SearchRouteView() {
+export default function BuyTicketView() {
+	const [discountFlag, setDiscountFlag] = useState(true);
+	const handleClick = () => {
+		setDiscountFlag(!discountFlag);
+	};
+
 	return (
-		<div>
-			<h1>Kupowanie biletu w robocie</h1>
-			<Link to={"/"}>
-				<button>Go back</button>
-			</Link>
+		<div className={styles.ticketBody}>
+			<TopBarComponent></TopBarComponent>
+			<div className={styles.content}>
+				<div className="toggleContainer">
+					<button
+						className={`${styles.toggleButton} ${
+							discountFlag ? styles.active : ""
+						}`}
+						onClick={handleClick}
+					>
+						Normalne
+					</button>
+					<button
+						className={`${styles.toggleButton} ${
+							!discountFlag ? styles.active : ""
+						}`}
+						onClick={handleClick}
+					>
+						Ulgowe
+					</button>
+				</div>
+				{discountFlag ? (
+					<div className={styles.ticketGrid}>
+						<TicketCardComponent price="4" time="20 min"></TicketCardComponent>
+						<TicketCardComponent price="6" time="60 min"></TicketCardComponent>
+						<TicketCardComponent price="8" time="90 min"></TicketCardComponent>
+						<TicketCardComponent price="199" time="1 msc"></TicketCardComponent>
+						<TicketCardComponent price="398" time="2 msc"></TicketCardComponent>
+						<TicketCardComponent price="597" time="3 msc"></TicketCardComponent>
+					</div>
+				) : (
+					<div className={styles.ticketGrid}>
+						<TicketCardComponent price="2" time="20 min"></TicketCardComponent>
+						<TicketCardComponent price="3" time="60 min"></TicketCardComponent>
+						<TicketCardComponent price="4" time="90 min"></TicketCardComponent>
+						<TicketCardComponent
+							price="99,50"
+							time="1 msc"
+						></TicketCardComponent>
+						<TicketCardComponent price="199" time="2 msc"></TicketCardComponent>
+						<TicketCardComponent
+							price="298,50"
+							time="3 msc"
+						></TicketCardComponent>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

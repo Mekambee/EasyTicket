@@ -5,6 +5,7 @@ import MyTicketsView from "../MyTickets/MyTicketsView";
 import BuyTicketView from "../BuyTicket/BuyTicketView";
 import SearchRouteView from "../SearchRoute/SearchRouteView";
 import TimetableView from "../Timetable/TimetableView";
+import OuterSiteView from "../OuterSite/OuterSiteView";
 
 const AppRoutes = () => {
 	return (
@@ -26,6 +27,10 @@ const AppRoutes = () => {
 				<Route
 					path="/timetable"
 					element={<TimetableView></TimetableView>}
+				></Route>
+				<Route
+					path="/outer-site"
+					element={<OuterSiteView></OuterSiteView>}
 				></Route>
 			</Routes>
 		</Router>

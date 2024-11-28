@@ -1,0 +1,55 @@
+/* Ogólny kontener */
+.container {
+	font-family: "Arial", sans-serif;
+	text-align: center;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Górny pasek */
+.topBar {
+	background-color: #28a745;
+	color: white;
+	padding: 20px 0;
+	font-size: 24px;
+	font-family: "Times New Roman", serif;
+}
+
+/* Treść */
+.content {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+/* Tekst informacyjny */
+.infoText {
+	font-size: 18px;
+	font-style: italic;
+	margin-bottom: 20px;
+	line-height: 1.6;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+/* Przycisk */
+.confirmButton {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 18px;
+	cursor: pointer;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.confirmButton:hover {
+	background-color: #218838;
+}

@@ -48,30 +48,18 @@ export default function HomePage() {
 				<div className={styles.reportProblemContainer}>
 					<button className={styles.reportProblemButton}>
 						<svg
-							viewBox="0 0 512 512"
-							fill="currentColor"
-							height="1em"
-							width="1em"
+							xmlns="http://www.w3.org/2000/svg"
+							width="80"
+							height="80"
+							viewBox="0 0 24 24"
 						>
 							<path
-								fill="none"
-								stroke="currentColor"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={32}
-								d="M85.57 446.25h340.86a32 32 0 0028.17-47.17L284.18 82.58c-12.09-22.44-44.27-22.44-56.36 0L57.4 399.08a32 32 0 0028.17 47.17z"
+								fill="gray"
+								d="M1 21L12 2l11 19zm11-3q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m-1-3h2v-5h-2z"
 							/>
-							<path
-								fill="none"
-								stroke="currentColor"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={32}
-								d="M250.26 195.39l5.74 122 5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 5.95z"
-							/>
-							<path d="M256 397.25a20 20 0 1120-20 20 20 0 01-20 20z" />
 						</svg>
 					</button>
+					<p>Zgłoś Problem</p>
 				</div>
 			</div>
 		</div>

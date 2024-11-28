@@ -1,0 +1,51 @@
+.ticketBody {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+.content {
+	height: 90vh;
+	margin-top: 30px;
+}
+.ticketGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3 kolumny o równej szerokości */
+	gap: 20px; /* Odstępy między kartami */
+	padding: 20px;
+	max-width: 900px; /* Ograniczenie szerokości kontenera */
+	margin: 0 auto; /* Wyśrodkowanie na stronie */
+	justify-items: center;
+}
+.toggleContainer {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.toggleButton {
+	flex: 1;
+	padding: 10px;
+	font-size: 16px;
+	background-color: white;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggleButton.active {
+	background-color: #0d47a1;
+	color: white;
+}
+@media (max-width: 1000px) {
+	.ticketGrid {
+		grid-template-columns: repeat(2, 1fr); /* 2 kolumny */
+	}
+}
+
+@media (max-width: 768px) {
+	.ticketGrid {
+		grid-template-columns: 1fr; /* Jedna kolumna na małych ekranach */
+	}
+}
