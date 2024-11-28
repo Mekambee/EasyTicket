@@ -1,0 +1,62 @@
+.topBar {
+	width: 100%;
+	background-color: #002288;
+	color: white;
+	padding: 10px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+.homeButton {
+	margin-left: 10px;
+}
+.backHomeIcon {
+	margin-left: 10px;
+	color: white;
+}
+.logo {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+.logo h1 {
+	margin: 0;
+	font-size: 20px;
+}
+.topBarButtons {
+	margin-right: 10px;
+}
+.topBarButtons button {
+	background-color: white;
+	border: none;
+	padding: 5px 10px;
+	margin: 0 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s;
+}
+.topBarButtons button:hover {
+	background-color: #ccc;
+}
+.topBarButtons .highlighted {
+	background-color: black;
+	color: yellow;
+}
+@media (max-width: 768px) {
+	.top-bar {
+		flex-direction: column;
+		padding: 10px;
+	}
+
+	.buttons {
+		margin-top: 10px;
+	}
+
+	.buttons button {
+		margin: 5px 3px;
+		font-size: 12px;
+	}
+}
