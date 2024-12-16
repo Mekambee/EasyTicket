@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "./OuterSiteStyle.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function OuterSiteView() {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const { price, time } = location.state || {};
 	const handleNavigation = () => {
-		navigate("/");
+		navigate("/my-tickets", { state: { price, time } });
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.topBar}>Twój Bank</div>

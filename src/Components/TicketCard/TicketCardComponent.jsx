@@ -16,7 +16,7 @@ export default function TicketCardComponent({ price, time }) {
 	// Funkcje obsługujące kliknięcia w przyciski popupu
 	const handleOptionClick = () => {
 		setTicketBuyPopUpVisible(false);
-		navigate("/outer-site");
+		navigate("/outer-site", { state: { price, time } });
 	};
 
 	return (
