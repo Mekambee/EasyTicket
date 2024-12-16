@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageView from "../HomePage/HomePageView";
 import MyTicketsView from "../MyTickets/MyTicketsView";
 import BuyTicketView from "../BuyTicket/BuyTicketView";
@@ -10,7 +10,7 @@ import YourTicketView from "../YourTicketView/YourTicketView";
 
 const AppRoutes = () => {
 	return (
-		<Router>
+		// <Router>
 			<Routes>
 				<Route path="/" element={<HomePageView></HomePageView>}></Route>
 				<Route
@@ -38,7 +38,7 @@ const AppRoutes = () => {
 					element={<YourTicketView></YourTicketView>}
 				></Route>
 			</Routes>
-		</Router>
+		// </Router>
 	);
 };
 
