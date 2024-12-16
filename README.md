@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+# Strona Projektu : https://mekambee.github.io/EasyTicket/#/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Opis Projektu:
+Osoby korzystające z komunikacji miejskiej w tym zarówno mieszkańcy miasta jak i turyści muszą zaopatrzyć się w bilety. Mogą to być bilety krótkoterminowe albo okresowe, na różne strefy i z odpowiednimi ulgami. Bilety powinny obejmować tramwaje i autobusy.
+Podróżujący chcieliby łatwo i szybko nabyć bilety i wybrać odpowiednie linie komunikacji miejskiej, aby dotrzeć do celu na czas i bez stresu podczas kontroli biletów. Istnieje jednak kilka przeszkód, które mogą napotkać:
+• Trudność w znalezieniu biletomatu w pobliżu – nie na każdym przystanku znajduje się biletomat
+• Brak gotówki – niektóre biletomaty w tramwajach przyjmują tylko monety
+• Brak znajomości rozkładu jazdy w danym miejscu
+• Trudność w zaplanowaniu trasy, ze względu na szeroki wybór linii i
+rozbudowany rozkład jazdy
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Użytkownicy transportu publicznego w miastach potrzebują w łatwy sposób zaplanować trasę do miejsca docelowego, sprawdzić rozkład jazdy na danym przystanku i uzyskać informację o ewentualnych opóźnieniach. Dzięki aplikacji EasyTicket podróżujący w prosty sposób, poruszając się po intuicyjnych przyciskach, rozpoczynając od menu głównego mogą nabyć bilety z możliwością wyboru przysługującej im ulgi, pokazywać takie bilety do kontroli w formie kodu QR, sprawdzić rozkład jazdy, wyszukać interesujące ich połączenie komunikacyjne, przeglądać oraz aktywować swoje bilety, z możliwością zamrażania, czy reaktywowania tych długoterminowych, oraz generować dla nich faktury w formie PDF.
