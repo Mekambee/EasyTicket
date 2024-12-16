@@ -28,32 +28,42 @@
 .topBarButtons {
 	margin-right: 10px;
 }
-.topBarButtons button {
-	background-color: var(--bg-color);
+
+.buttonGroup {
+	display: inline;
+	margin: 0 0.5rem;
+}
+
+.button {
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
 	border: none;
-	padding: 5px 10px;
-	margin: 0 5px;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 14px;
+	outline: none;
 	transition: background-color 0.3s;
 }
-.topBarButtons button:hover {
-	background-color: var(--bg-grey);
+
+.buttonImg {
+	height: 3rem;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	cursor: pointer;
 }
 
-@media (max-width: 768px) {
-	.top-bar {
-		flex-direction: column;
-		padding: 10px;
+@media (max-width: 1000px) {
+	.logo {
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+	.logo {
+		display: initial;
 	}
 
-	.buttons {
-		margin-top: 10px;
-	}
-
-	.buttons button {
-		margin: 5px 3px;
-		font-size: 12px;
+	.button {
+		display: none;
 	}
 }
