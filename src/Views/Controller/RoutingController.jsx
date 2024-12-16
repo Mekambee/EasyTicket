@@ -4,7 +4,7 @@ import HomePageView from "../HomePage/HomePageView";
 import MyTicketsView from "../MyTickets/MyTicketsView";
 import BuyTicketView from "../BuyTicket/BuyTicketView";
 import SearchRouteView from "../SearchRoute/SearchRouteView";
-import TimetableView from "../Timetable/TimetableView";
+import TimetableView from "../Timetable/TimetableView.tsx";
 import OuterSiteView from "../OuterSite/OuterSiteView";
 
 const AppRoutes = () => {

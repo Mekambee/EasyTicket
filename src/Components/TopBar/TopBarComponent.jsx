@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TopBarStyle.module.css";
 import { Link } from "react-router-dom";
 
-export default function TopBarComponent() {
+export default function TopBarComponent({ noStyleButtons }) {
 	return (
 		<div className={styles.topBar}>
 			<div className={styles.backHomeButton}>
@@ -21,15 +21,17 @@ export default function TopBarComponent() {
 			<div className={styles.logo}>
 				<h1>EasyTicket</h1>
 			</div>
-			<div className={styles.topBarButtons}>
-				<button>Aa</button>
-				<button>A+</button>
-				<button>A-</button>
-				<button className={styles.highlighted}>Aa</button>
-				<button className={styles.highlighted}>Aa</button>
-				<button className={styles.highlighted}>Aa</button>
-				<button>🇵🇱</button>
-			</div>
+			{!noStyleButtons ? (
+				<div className={styles.topBarButtons}>
+					<button>Aa</button>
+					<button>A+</button>
+					<button>A-</button>
+					<button className={styles.highlighted}>Aa</button>
+					<button className={styles.highlighted}>Aa</button>
+					<button className={styles.highlighted}>Aa</button>
+					<button>🇵🇱</button>
+				</div>
+			) : null}
 		</div>
 	);
 }
