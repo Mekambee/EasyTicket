@@ -7,10 +7,18 @@
 
 	--fg-color: #1f2329;
 	--fg-grey: #59636e;
+	--fg-grey-variant: #6f7c8b;
 	--bg-grey: #f6f8fa;
+	--bg-grey-variant: #b3c5d5;
 	--bg-color: #ffffff;
+	--main-color: #1030a0;
+	--main-color-variant: #0b2274;
+	--external-color: #0fa051;
+	--external-color-variant: #0a7038;
 	--link-color: #0969da;
-	--danger-color: #a40e26;
+	--payment-color: #e33a23;
+	--payment-color-variant: #b92b18;
+	--shadow-color: #00000033;
 
 	color: var(--fg-color);
 	background-color: var(--bg-color);

@@ -1,6 +1,6 @@
 .homeBody {
 	font-family: Arial, sans-serif;
-	background-color: #f2f2f2;
+	background-color: var(--bg-grey);
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -21,8 +21,8 @@
 }
 .buttonBox button {
 	width: 100%;
-	background-color: #002288;
-	color: white;
+	background-color: var(--main-color);
+	color: var(--bg-grey);
 	border: none;
 	padding: 20px 50px;
 	margin: 10px;
@@ -31,7 +31,7 @@
 	transition: background-color 0.3s;
 }
 .buttonBox button:hover {
-	background-color: #001166;
+	background-color: var(--main-color-variant);
 }
 .reportProblemContainer {
 	width: 100px;

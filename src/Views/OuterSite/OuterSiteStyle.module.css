@@ -9,8 +9,8 @@
 
 /* Górny pasek */
 .topBar {
-	background-color: #28a745;
-	color: white;
+	background-color: var(--external-color);
+	color: var(--bg-color);
 	padding: 20px 0;
 	font-size: 24px;
 	font-family: "Times New Roman", serif;
@@ -40,8 +40,8 @@
 
 /* Przycisk */
 .confirmButton {
-	background-color: #28a745;
-	color: white;
+	background-color: var(--external-color);
+	color: var(--bg-color);
 	border: none;
 	border-radius: 10px;
 	padding: 10px 20px;
@@ -51,5 +51,5 @@
 }
 
 .confirmButton:hover {
-	background-color: #218838;
+	background-color: var(--external-color-variant);
 }
