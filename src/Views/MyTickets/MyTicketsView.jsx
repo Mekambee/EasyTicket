@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./MyTicketsStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import TicketCardComponent from "../../Components/TicketCard/TicketCardComponent";
+import ActiveTicketCardComponent from "../../Components/ActiveTicket/ActiveTicketCardComponent";
 
 export default function MyTicketsPage() {
 	const [tickets, setTickets] = useState([]);
@@ -52,7 +53,7 @@ export default function MyTicketsPage() {
 				<h2 className={styles.sectionTitle}>Posiadane Bilety</h2>
 				<div className={styles.ticketGrid}>
 					{tickets.map((ticket) => (
-						<TicketCardComponent
+						<ActiveTicketCardComponent
 							key={ticket.id}
 							price={ticket.price}
 							time={ticket.time}

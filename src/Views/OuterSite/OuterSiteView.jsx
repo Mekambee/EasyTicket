@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./OuterSiteStyle.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -6,7 +6,18 @@ export default function OuterSiteView() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { price, time } = location.state || {};
-	const handleNavigation = () => {
+
+	const [isPopupVisible, setPopupVisible] = useState(false);
+
+	const handleConfirmClick = () => {
+		setPopupVisible(true);
+	};
+
+	const handleActivateNow = () => {
+		navigate("/your-ticket", { state: { price, time } });
+	};
+
+	const handlePostpone = () => {
 		navigate("/my-tickets", { state: { price, time } });
 	};
 
@@ -20,10 +31,25 @@ export default function OuterSiteView() {
 					zewnętrzną stroną niestanowiącą części systemu <br />
 					<span className={styles.bold}>EasyTicket</span>.
 				</p>
-				<button className={styles.confirmButton} onClick={handleNavigation}>
+				<button className={styles.confirmButton} onClick={handleConfirmClick}>
 					Potwierdź Płatność
 				</button>
 			</div>
+
+			{isPopupVisible && (
+				<div className={styles.popup}>
+					<div className={styles.popupContent}>
+						<h2 className={styles.popupTitle}>Transakcja przebiegła pomyślnie</h2>
+						<p className={styles.popupText}>
+							Wybierz, co chcesz zrobić z zakupionym biletem
+						</p>
+						<div className={styles.popupGrid}>
+							<button onClick={handleActivateNow}>Aktywuj teraz</button>
+							<button onClick={handlePostpone}>Odłóż na później</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

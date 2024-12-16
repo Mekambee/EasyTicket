@@ -6,6 +6,7 @@ import BuyTicketView from "../BuyTicket/BuyTicketView";
 import SearchRouteView from "../SearchRoute/SearchRouteView";
 import TimetableView from "../Timetable/TimetableView.tsx";
 import OuterSiteView from "../OuterSite/OuterSiteView";
+import YourTicketView from "../YourTicketView/YourTicketView";
 
 const AppRoutes = () => {
 	return (
@@ -31,6 +32,10 @@ const AppRoutes = () => {
 				<Route
 					path="/outer-site"
 					element={<OuterSiteView></OuterSiteView>}
+				></Route>
+				<Route
+					path="/your-ticket"
+					element={<YourTicketView></YourTicketView>}
 				></Route>
 			</Routes>
 		</Router>
