@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/EasyTicket/static/css/main.41d6fafb.css",
-    "main.js": "/EasyTicket/static/js/main.5a116538.js",
+    "main.js": "/EasyTicket/static/js/main.a5f40065.js",
     "static/js/453.900dcb40.chunk.js": "/EasyTicket/static/js/453.900dcb40.chunk.js",
     "static/media/contrast-1.svg": "/EasyTicket/static/media/contrast-1.e80384aac7ed73d75a16e936d50d39e0.svg",
     "static/media/contrast-2.svg": "/EasyTicket/static/media/contrast-2.2f12c6b6c69c0c34706cec5045c86d6f.svg",
@@ -42,11 +42,11 @@
     "static/media/expand.svg": "/EasyTicket/static/media/expand.4733d058a1c8efceeceaa99bf4cf880b.svg",
     "static/media/unexpand.svg": "/EasyTicket/static/media/unexpand.c374db5c14266401fa6730b622a2cdea.svg",
     "main.41d6fafb.css.map": "/EasyTicket/static/css/main.41d6fafb.css.map",
-    "main.5a116538.js.map": "/EasyTicket/static/js/main.5a116538.js.map",
+    "main.a5f40065.js.map": "/EasyTicket/static/js/main.a5f40065.js.map",
     "453.900dcb40.chunk.js.map": "/EasyTicket/static/js/453.900dcb40.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.41d6fafb.css",
-    "static/js/main.5a116538.js"
+    "static/js/main.a5f40065.js"
   ]
 }
