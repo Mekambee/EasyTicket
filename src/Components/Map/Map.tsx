@@ -69,6 +69,7 @@ export default class Map extends Component<
 
 	componentWillUnmount() {
 		this.map?.remove();
+		this.map = undefined;
 		this.intervals.forEach((int) => clearInterval(int));
 	}
 
