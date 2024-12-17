@@ -30,6 +30,11 @@ import other_vehicle_icon from "./assets/icons/other-vehicle.svg";
 
 import { VehicleType } from "./api.ts";
 
+export function getHistoryState(): NonNullable<object> {
+	// eslint-disable-next-line no-restricted-globals
+	return history.state ?? {};
+}
+
 /** Compare two series of strings
  *
  * The comparison of arrays is done lexically.

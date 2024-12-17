@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import styles from "./HomePageStyle.module.css";
 import HomeButtonComponent from "../../Components/HomeButton/HomeButtonComponent";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";

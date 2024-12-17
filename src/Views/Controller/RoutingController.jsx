@@ -1,5 +1,6 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { Router, Route, Switch } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import HomePageView from "../HomePage/HomePageView";
 import MyTicketsView from "../MyTickets/MyTicketsView";
 import BuyTicketView from "../BuyTicket/BuyTicketView";
@@ -10,35 +11,31 @@ import YourTicketView from "../YourTicketView/YourTicketView";
 
 const AppRoutes = () => {
 	return (
-		// <Router>
-			<Routes>
-				<Route path="/" element={<HomePageView></HomePageView>}></Route>
-				<Route
-					path="/buy-ticket"
-					element={<BuyTicketView></BuyTicketView>}
-				></Route>
-				<Route
-					path="/my-tickets"
-					element={<MyTicketsView></MyTicketsView>}
-				></Route>
-				<Route
-					path="/search-route"
-					element={<SearchRouteView></SearchRouteView>}
-				></Route>
-				<Route
-					path="/timetable"
-					element={<TimetableView></TimetableView>}
-				></Route>
-				<Route
-					path="/outer-site"
-					element={<OuterSiteView></OuterSiteView>}
-				></Route>
-				<Route
-					path="/your-ticket"
-					element={<YourTicketView></YourTicketView>}
-				></Route>
-			</Routes>
-		// </Router>
+		<Router hook={useHashLocation}>
+			<Switch>
+				<Route path="/">
+					<HomePageView />
+				</Route>
+				<Route path="/buy-ticket">
+					<BuyTicketView />
+				</Route>
+				<Route path="/my-tickets">
+					<MyTicketsView />
+				</Route>
+				<Route path="/search-route">
+					<SearchRouteView />
+				</Route>
+				<Route path="/timetable">
+					<TimetableView />
+				</Route>
+				<Route path="/outer-site">
+					<OuterSiteView />
+				</Route>
+				<Route path="/your-ticket">
+					<YourTicketView />
+				</Route>
+			</Switch>
+		</Router>
 	);
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./BuyTicketStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import TicketCardComponent from "../../Components/TicketCard/TicketCardComponent";
-import { Link } from "react-router-dom";
 
 export default function BuyTicketView() {
 	const [discountFlag, setDiscountFlag] = useState(true);

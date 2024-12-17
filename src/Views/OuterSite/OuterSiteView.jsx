@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styles from "./OuterSiteStyle.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { navigate } from "wouter/use-hash-location";
+import { getHistoryState } from "../../util.ts";
 
 export default function OuterSiteView() {
-	const navigate = useNavigate();
-	const location = useLocation();
-	const { price, time } = location.state || {};
-
 	const [isPopupVisible, setPopupVisible] = useState(false);
+	const { price, time } = getHistoryState();
 
 	const handleConfirmClick = () => {
 		setPopupVisible(true);
@@ -39,7 +37,9 @@ export default function OuterSiteView() {
 			{isPopupVisible && (
 				<div className={styles.popup}>
 					<div className={styles.popupContent}>
-						<h2 className={styles.popupTitle}>Transakcja przebiegła pomyślnie</h2>
+						<h2 className={styles.popupTitle}>
+							Transakcja przebiegła pomyślnie
+						</h2>
 						<p className={styles.popupText}>
 							Wybierz, co chcesz zrobić z zakupionym biletem
 						</p>

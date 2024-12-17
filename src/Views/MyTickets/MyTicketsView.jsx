@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { navigate } from "wouter/use-hash-location";
 import styles from "./MyTicketsStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
-import TicketCardComponent from "../../Components/TicketCard/TicketCardComponent";
 import ActiveTicketCardComponent from "../../Components/ActiveTicket/ActiveTicketCardComponent";
+import { getHistoryState } from "../../util.ts";
 
 export default function MyTicketsPage() {
 	const [ownedTickets, setOwnedTickets] = useState([]);
 	const [activeTickets, setActiveTickets] = useState([]);
-
-	const location = useLocation();
-	const navigate = useNavigate();
-	const { price, time } = location.state || {};
+	const { price, time } = getHistoryState();
 
 	const saveTicketsToSessionStorage = () => {
 		sessionStorage.setItem("ownedTickets", JSON.stringify(ownedTickets));
@@ -19,8 +16,12 @@ export default function MyTicketsPage() {
 	};
 
 	useEffect(() => {
-		const savedOwnedTickets = JSON.parse(sessionStorage.getItem("ownedTickets"));
-		const savedActiveTickets = JSON.parse(sessionStorage.getItem("activeTickets"));
+		const savedOwnedTickets = JSON.parse(
+			sessionStorage.getItem("ownedTickets")
+		);
+		const savedActiveTickets = JSON.parse(
+			sessionStorage.getItem("activeTickets")
+		);
 
 		if (savedOwnedTickets) setOwnedTickets(savedOwnedTickets);
 		if (savedActiveTickets) setActiveTickets(savedActiveTickets);
@@ -33,16 +34,21 @@ export default function MyTicketsPage() {
 					(ticket) => ticket.price === price && ticket.time === time
 				);
 				if (ticketExists) return prevTickets;
-				const updatedTickets = [...prevTickets, { id: Date.now(), price, time }];
+				const updatedTickets = [
+					...prevTickets,
+					{ id: Date.now(), price, time },
+				];
 				return updatedTickets;
 			});
 			navigate(".", { replace: true, state: {} });
 		}
-	}, [price, time, navigate]);
+	}, [price, time]);
 
 	const handleActivateTicket = (ticketId) => {
 		setOwnedTickets((prevOwned) => {
-			const ticketToActivate = prevOwned.find((ticket) => ticket.id === ticketId);
+			const ticketToActivate = prevOwned.find(
+				(ticket) => ticket.id === ticketId
+			);
 			if (ticketToActivate) {
 				setActiveTickets((prevActive) => [...prevActive, ticketToActivate]);
 				return prevOwned.filter((ticket) => ticket.id !== ticketId);

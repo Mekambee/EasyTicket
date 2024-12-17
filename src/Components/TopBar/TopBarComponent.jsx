@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TopBarStyle.module.css";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import contrast_1_icon from "../../assets/contrast-1.svg";
 import contrast_2_icon from "../../assets/contrast-2.svg";
 import contrast_3_icon from "../../assets/contrast-3.svg";

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import styles from "./TicketCardStyle.module.css";
-import { useNavigate } from "react-router-dom";
+import { navigate } from "wouter/use-hash-location";
 
 export default function TicketCardComponent({ price, time }) {
 	const [isTicketBuyPopUpVisible, setTicketBuyPopUpVisible] = useState(false);
-
-	const navigate = useNavigate();
 
 	const handleBuyClick = () => {
 		setTicketBuyPopUpVisible(true);

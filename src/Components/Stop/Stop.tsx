@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from "react";
+import { navigate } from "wouter/use-hash-location";
 import { MapCtx } from "../Map/Map.tsx";
 import { VehicleType } from "../../api.ts";
 import { cmp, get_type_name, get_vehicle_icon } from "../../util.ts";
 import style from "./Stop.module.css";
-
-//TODO
-const navigate = (url: string) => alert(`Please go to the page at '${url}' :)`);
 
 export default function Stop({
 	system,

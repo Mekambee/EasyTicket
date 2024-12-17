@@ -1,4 +1,5 @@
 import React, { Component, createContext, createRef, ReactNode } from "react";
+import { navigate } from "wouter/use-hash-location";
 import { effect, Signal, signal } from "@preact/signals-react";
 import { GeoJsonObject } from "geojson";
 import L from "leaflet";
@@ -15,9 +16,6 @@ import layers from "../../layers.json";
 import style from "./Map.module.css";
 import "leaflet/dist/leaflet.css";
 import "../../Styles/Map.css";
-
-//TODO
-const navigate = (url: string) => alert(`Please go to the page at '${url}' :)`);
 
 export const MapCtx = createContext<{
 	map: L.Map;
