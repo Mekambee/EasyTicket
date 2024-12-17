@@ -10,11 +10,6 @@ export default function MyTicketsPage() {
 	const [activeTickets, setActiveTickets] = useState([]);
 	const { price, time } = getHistoryState();
 
-	const saveTicketsToSessionStorage = () => {
-		sessionStorage.setItem("ownedTickets", JSON.stringify(ownedTickets));
-		sessionStorage.setItem("activeTickets", JSON.stringify(activeTickets));
-	};
-
 	useEffect(() => {
 		const savedOwnedTickets = JSON.parse(
 			sessionStorage.getItem("ownedTickets")
@@ -58,7 +53,8 @@ export default function MyTicketsPage() {
 	};
 
 	useEffect(() => {
-		saveTicketsToSessionStorage();
+		sessionStorage.setItem("ownedTickets", JSON.stringify(ownedTickets));
+		sessionStorage.setItem("activeTickets", JSON.stringify(activeTickets));
 	}, [ownedTickets, activeTickets]);
 
 	return (
