@@ -1,97 +1,112 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "wouter/use-hash-location";
+import { useLocation } from "wouter";
 import styles from "./MyTicketsStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import ActiveTicketCardComponent from "../../Components/ActiveTicket/ActiveTicketCardComponent";
-import { getHistoryState } from "../../util.ts";
 
 export default function MyTicketsPage() {
-	const [ownedTickets, setOwnedTickets] = useState([]);
-	const [activeTickets, setActiveTickets] = useState([]);
-	const { price, time } = getHistoryState();
+  const [ownedTickets, setOwnedTickets] = useState([]);
+  const [activeTickets, setActiveTickets] = useState([]);
+  const [, navigate] = useLocation();
 
-	useEffect(() => {
-		const savedOwnedTickets = JSON.parse(
-			sessionStorage.getItem("ownedTickets")
-		);
-		const savedActiveTickets = JSON.parse(
-			sessionStorage.getItem("activeTickets")
-		);
+  const getQueryParams = () => {
+    const queryString = window.location.href.split("?")[1]?.split("#")[0] || "";
+    const params = new URLSearchParams(queryString);
+    return {
+      price: params.get("price"),
+      time: params.get("time"),
+    };
+  };
 
-		if (savedOwnedTickets) setOwnedTickets(savedOwnedTickets);
-		if (savedActiveTickets) setActiveTickets(savedActiveTickets);
-	}, []);
+  useEffect(() => {
+    const savedOwnedTickets = JSON.parse(
+      sessionStorage.getItem("ownedTickets")
+    );
+    const savedActiveTickets = JSON.parse(
+      sessionStorage.getItem("activeTickets")
+    );
 
-	useEffect(() => {
-		if (price && time) {
-			setOwnedTickets((prevTickets) => {
-				const ticketExists = prevTickets.some(
-					(ticket) => ticket.price === price && ticket.time === time
-				);
-				if (ticketExists) return prevTickets;
-				const updatedTickets = [
-					...prevTickets,
-					{ id: Date.now(), price, time },
-				];
-				return updatedTickets;
-			});
-			navigate(".", { replace: true, state: {} });
-		}
-	}, [price, time]);
+    if (savedOwnedTickets) setOwnedTickets(savedOwnedTickets);
+    if (savedActiveTickets) setActiveTickets(savedActiveTickets);
+  }, []);
 
-	const handleActivateTicket = (ticketId) => {
-		setOwnedTickets((prevOwned) => {
-			const ticketToActivate = prevOwned.find(
-				(ticket) => ticket.id === ticketId
-			);
-			if (ticketToActivate) {
-				setActiveTickets((prevActive) => [...prevActive, ticketToActivate]);
-				return prevOwned.filter((ticket) => ticket.id !== ticketId);
-			}
-			return prevOwned;
-		});
-	};
+  useEffect(() => {
+    const { price, time } = getQueryParams();
 
-	useEffect(() => {
-		sessionStorage.setItem("ownedTickets", JSON.stringify(ownedTickets));
-		sessionStorage.setItem("activeTickets", JSON.stringify(activeTickets));
-	}, [ownedTickets, activeTickets]);
+    if (price && time) {
+      setOwnedTickets((prevTickets) => {
+        const ticketExists = prevTickets.some(
+          (ticket) => ticket.price === price && ticket.time === time
+        );
+        if (ticketExists) return prevTickets;
 
-	return (
-		<div className={styles.container}>
-			<TopBarComponent />
+        const updatedTickets = [...prevTickets, { id: Date.now(), price, time }];
 
-			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Aktywne Bilety</h2>
-				<div className={styles.ticketGrid}>
-					{activeTickets.map((ticket) => (
-						<ActiveTicketCardComponent
-							key={ticket.id}
-							price={ticket.price}
-							time={ticket.time}
-						/>
-					))}
-				</div>
-			</div>
+        sessionStorage.setItem("ownedTickets", JSON.stringify(updatedTickets));
 
-			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Posiadane Bilety</h2>
-				<div className={styles.ticketGrid}>
-					{ownedTickets.map((ticket) => (
-						<ActiveTicketCardComponent
-							key={ticket.id}
-							price={ticket.price}
-							time={ticket.time}
-							onActivate={() => handleActivateTicket(ticket.id)}
-						/>
-					))}
-				</div>
-			</div>
+        return updatedTickets;
+      });
 
-			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Historia Biletów</h2>
-				<div className={styles.ticketGrid}></div>
-			</div>
-		</div>
-	);
+      navigate("/my-tickets", { replace: true });
+    }
+  }, [navigate]);
+
+  const handleActivateTicket = (ticketId) => {
+    setOwnedTickets((prevOwned) => {
+      const ticketToActivate = prevOwned.find(
+        (ticket) => ticket.id === ticketId
+      );
+      if (ticketToActivate) {
+        const updatedOwned = prevOwned.filter(
+          (ticket) => ticket.id !== ticketId
+        );
+        const updatedActive = [...activeTickets, ticketToActivate];
+
+        sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwned));
+        sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
+
+        setActiveTickets(updatedActive);
+        return updatedOwned;
+      }
+      return prevOwned;
+    });
+  };
+
+  return (
+    <div className={styles.container}>
+      <TopBarComponent />
+
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Aktywne Bilety</h2>
+        <div className={styles.ticketGrid}>
+          {activeTickets.map((ticket) => (
+            <ActiveTicketCardComponent
+              key={ticket.id}
+              price={ticket.price}
+              time={ticket.time}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Posiadane Bilety</h2>
+        <div className={styles.ticketGrid}>
+          {ownedTickets.map((ticket) => (
+            <ActiveTicketCardComponent
+              key={ticket.id}
+              price={ticket.price}
+              time={ticket.time}
+              onActivate={() => handleActivateTicket(ticket.id)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Historia Biletów</h2>
+        <div className={styles.ticketGrid}></div>
+      </div>
+    </div>
+  );
 }
