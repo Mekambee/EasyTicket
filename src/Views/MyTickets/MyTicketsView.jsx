@@ -19,47 +19,32 @@ export default function MyTicketsPage() {
   };
 
   useEffect(() => {
-    const savedOwnedTickets = JSON.parse(
-      sessionStorage.getItem("ownedTickets")
-    );
-    const savedActiveTickets = JSON.parse(
-      sessionStorage.getItem("activeTickets")
-    );
+    const savedOwnedTickets = JSON.parse(sessionStorage.getItem("ownedTickets")) || [];
+    const savedActiveTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
 
-    if (savedOwnedTickets) setOwnedTickets(savedOwnedTickets);
-    if (savedActiveTickets) setActiveTickets(savedActiveTickets);
+    setOwnedTickets(savedOwnedTickets);
+    setActiveTickets(savedActiveTickets);
   }, []);
 
   useEffect(() => {
     const { price, time } = getQueryParams();
 
     if (price && time) {
-      setOwnedTickets((prevTickets) => {
-        const ticketExists = prevTickets.some(
-          (ticket) => ticket.price === price && ticket.time === time
-        );
-        if (ticketExists) return prevTickets;
-
-        const updatedTickets = [...prevTickets, { id: Date.now(), price, time }];
-
-        sessionStorage.setItem("ownedTickets", JSON.stringify(updatedTickets));
-
-        return updatedTickets;
+      const newTicket = { id: Date.now(), price, time };
+      setOwnedTickets((prev) => {
+        const updated = [...prev, newTicket];
+        sessionStorage.setItem("ownedTickets", JSON.stringify(updated));
+        return updated;
       });
-
       navigate("/my-tickets", { replace: true });
     }
   }, [navigate]);
 
   const handleActivateTicket = (ticketId) => {
     setOwnedTickets((prevOwned) => {
-      const ticketToActivate = prevOwned.find(
-        (ticket) => ticket.id === ticketId
-      );
+      const ticketToActivate = prevOwned.find((ticket) => ticket.id === ticketId);
       if (ticketToActivate) {
-        const updatedOwned = prevOwned.filter(
-          (ticket) => ticket.id !== ticketId
-        );
+        const updatedOwned = prevOwned.filter((ticket) => ticket.id !== ticketId);
         const updatedActive = [...activeTickets, ticketToActivate];
 
         sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwned));
