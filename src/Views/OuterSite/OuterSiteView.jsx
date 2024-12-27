@@ -13,6 +13,7 @@ const getQueryParams = (queryString) => {
 export default function OuterSiteView() {
   const [, navigate] = useLocation();
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isVehiclePopupVisible, setVehiclePopupVisible] = useState(false);
 
   const { price, time } = getQueryParams(window.location.search);
 
@@ -26,8 +27,13 @@ export default function OuterSiteView() {
   };
 
   const handleActivateNow = () => {
-    const newTicket = { id: Date.now(), price, time };
-    saveToSessionStorage(newTicket); // Save to sessionStorage
+    setPopupVisible(false);
+    setVehiclePopupVisible(true);
+  };
+
+  const handleVehicleSubmit = () => {
+    const newTicket = { id: Date.now(), price, time, vehicleIdentifier: "HG924" };
+    saveToSessionStorage(newTicket);
     navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
   };
 
@@ -64,7 +70,27 @@ export default function OuterSiteView() {
           </div>
         </div>
       )}
+
+      {isVehiclePopupVisible && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent}>
+            <h2 className={styles.popupTitle}>Aktywacja biletu</h2>
+            <p className={styles.popupText}>
+              Wpisz identyfikator pojazdu znajdujący się nad kasownikami i przy drzwiach.
+            </p>
+            <input
+              className={styles.vehicleInput}
+              type="text"
+              value="HG924"
+              readOnly
+            />
+            <div className={styles.popupGrid}>
+              <button onClick={() => setVehiclePopupVisible(false)}>Anuluj</button>
+              <button onClick={handleVehicleSubmit}>Aktywuj</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
