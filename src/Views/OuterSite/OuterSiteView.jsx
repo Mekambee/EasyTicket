@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import styles from "./OuterSiteStyle.module.css";
-import { navigate } from "wouter/use-hash-location";
-import { getHistoryState } from "../../util.ts";
+import { useLocation } from "wouter";
+
+const getQueryParams = (queryString) => {
+	const params = new URLSearchParams(queryString);
+	return {
+		price: params.get("price"),
+		time: params.get("time"),
+	};
+};
 
 export default function OuterSiteView() {
+	const [, navigate] = useLocation();
 	const [isPopupVisible, setPopupVisible] = useState(false);
-	const { price, time } = getHistoryState();
+
+	const { price, time } = getQueryParams(window.location.search);
 
 	const handleConfirmClick = () => {
 		setPopupVisible(true);
 	};
 
 	const handleActivateNow = () => {
-		navigate("/your-ticket", { state: { price, time } });
+		navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
 	};
 
 	const handlePostpone = () => {
-		navigate("/my-tickets", { state: { price, time } });
+		navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
 	};
 
 	return (
@@ -53,3 +62,5 @@ export default function OuterSiteView() {
 		</div>
 	);
 }
+
+

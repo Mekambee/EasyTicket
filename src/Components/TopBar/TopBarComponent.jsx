@@ -10,9 +10,12 @@ import font_size_3_icon from "../../assets/font-size-3.svg";
 import language_pl_icon from "../../assets/language-pl.svg";
 
 export default function TopBarComponent({ noStyleButtons }) {
+	const clearURL = () => {
+		window.history.replaceState({}, document.title, window.location.pathname + "#/");
+	};
 	return (
 		<div className={styles.topBar}>
-			<div className={styles.backHomeButton}>
+			<div className={styles.backHomeButton} onClick={clearURL}>
 				<Link to={"/"}>
 					<svg
 						className={styles.backHomeIcon}

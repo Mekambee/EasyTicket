@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./TicketCardStyle.module.css";
-import { navigate } from "wouter/use-hash-location";
+import { useLocation } from "wouter";
 
 export default function TicketCardComponent({ price, time }) {
 	const [isTicketBuyPopUpVisible, setTicketBuyPopUpVisible] = useState(false);
+	const [, navigate] = useLocation();
+
 
 	const handleBuyClick = () => {
 		setTicketBuyPopUpVisible(true);
@@ -11,10 +13,9 @@ export default function TicketCardComponent({ price, time }) {
 	const handleClosePopup = () => {
 		setTicketBuyPopUpVisible(false);
 	};
-	// Funkcje obsługujące kliknięcia w przyciski popupu
 	const handleOptionClick = () => {
 		setTicketBuyPopUpVisible(false);
-		navigate("/outer-site", { state: { price, time } });
+		navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
 	};
 
 	return (
