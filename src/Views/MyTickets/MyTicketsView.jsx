@@ -68,7 +68,7 @@ export default function MyTicketsPage() {
 				);
 				const updatedActive = [
 					...activeTickets,
-					{ ...ticketToActivate, activatedAt: new Date().toISOString() }, // Dodaj czas aktywacji
+					{ ...ticketToActivate, activatedAt: new Date().toISOString() }, 
 				];
 
 				sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwned));

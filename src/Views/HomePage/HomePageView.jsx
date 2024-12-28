@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import styles from "./HomePageStyle.module.css";
 import HomeButtonComponent from "../../Components/HomeButton/HomeButtonComponent";
@@ -10,43 +10,59 @@ const searchRouteText = "Wyszukaj trasę";
 const timetableText = "Rozkład jazdy";
 
 export default function HomePage() {
+	const [isPopupVisible, setIsPopupVisible] = useState(false);
+	const [problemDescription, setProblemDescription] = useState("");
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	const handleReportProblemClick = () => {
+		setIsPopupVisible(true);
+		setIsSubmitted(false);
+		setProblemDescription("");
+	};
+
+	const handlePopupClose = () => {
+		setIsPopupVisible(false);
+	};
+
+	const handleProblemSubmit = () => {
+		setIsSubmitted(true);
+		setTimeout(() => {
+			setIsPopupVisible(false);
+		}, 2000);
+	};
+
 	return (
 		<div className={styles.homeBody}>
-			<TopBarComponent></TopBarComponent>
+			<TopBarComponent />
 			<div className={styles.content}>
 				<h1>Witaj w Easy Ticket!</h1>
 				<div className={styles.buttonBox}>
 					<div className={styles.navlink}>
 						<Link to="/buy-ticket">
-							<HomeButtonComponent
-								buttonText={buyTicketText}
-							></HomeButtonComponent>
+							<HomeButtonComponent buttonText={buyTicketText} />
 						</Link>
 					</div>
 					<div className={styles.navlink}>
 						<Link to="/my-tickets">
-							<HomeButtonComponent
-								buttonText={myTicketsText}
-							></HomeButtonComponent>
+							<HomeButtonComponent buttonText={myTicketsText} />
 						</Link>
 					</div>
 					<div className={styles.navlink}>
 						<Link to="/search-route">
-							<HomeButtonComponent
-								buttonText={searchRouteText}
-							></HomeButtonComponent>
+							<HomeButtonComponent buttonText={searchRouteText} />
 						</Link>
 					</div>
 					<div className={styles.navlink}>
 						<Link to="/timetable">
-							<HomeButtonComponent
-								buttonText={timetableText}
-							></HomeButtonComponent>
+							<HomeButtonComponent buttonText={timetableText} />
 						</Link>
 					</div>
 				</div>
 				<div className={styles.reportProblemContainer}>
-					<button className={styles.reportProblemButton}>
+					<button
+						className={styles.reportProblemButton}
+						onClick={handleReportProblemClick}
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="80"
@@ -62,6 +78,37 @@ export default function HomePage() {
 					<p>Zgłoś Problem</p>
 				</div>
 			</div>
+
+			{isPopupVisible && (
+				<div className={styles.popup}>
+					<div className={styles.popupContent}>
+						<h2 className={styles.popupTitle}>Zgłoś problem podczas jazdy</h2>
+						{isSubmitted ? (
+							<p className={styles.successMessage}>Pomyślnie przesłano zgłoszenie!</p>
+						) : (
+							<>
+								<p className={styles.popupText}>Dokładnie opisz problem</p>
+								<textarea
+									className={styles.textArea}
+									value={problemDescription}
+									onChange={(e) => setProblemDescription(e.target.value)}
+								></textarea>
+								<div className={styles.popupActions}>
+									<button className={styles.cancelButton} onClick={handlePopupClose}>
+										Wróć
+									</button>
+									<button
+										className={styles.submitButton}
+										onClick={handleProblemSubmit}
+									>
+										Zgłoś
+									</button>
+								</div>
+							</>
+						)}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
