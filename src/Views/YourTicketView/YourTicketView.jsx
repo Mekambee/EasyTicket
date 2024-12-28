@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./YourTicketStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
+import { useLocation } from "wouter";
 
 const getQueryParams = (queryString) => {
 	const params = new URLSearchParams(queryString);
@@ -12,6 +13,11 @@ const getQueryParams = (queryString) => {
 
 export default function YourTicketView() {
 	const { price, time } = getQueryParams(window.location.search);
+	const [, navigate] = useLocation();
+
+	const handleBuyAgain = () => {
+		navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
+	};
 
 	return (
 		<div>
@@ -38,7 +44,9 @@ export default function YourTicketView() {
 					<p>strefy I+II+III</p>
 					<h3>Cena: {price} zł</h3>
 					<div className={styles.buttons}>
-						<button className={styles.buyAgainButton}>Kup Ponownie</button>
+						<button className={styles.buyAgainButton} onClick={handleBuyAgain}>
+							Kup Ponownie
+						</button>
 						<button className={styles.invoiceButton}>Pobierz Fakturę</button>
 					</div>
 				</div>
