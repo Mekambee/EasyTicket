@@ -4,10 +4,12 @@ import styles from "./MyTicketsStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import ActiveTicketCardComponent from "../../Components/ActiveTicket/ActiveTicketCardComponent";
 import ActivatedTicketCardComponent from "../../Components/ActivatedTicket/ActivatedTicketCardComponent";
+import ExpiredTicketCardComponent from "../../Components/ExpiredTicket/ExpiredTicketCardComponent";
 
 export default function MyTicketsPage() {
 	const [ownedTickets, setOwnedTickets] = useState([]);
 	const [activeTickets, setActiveTickets] = useState([]);
+	const [expiredTickets, setExpiredTickets] = useState([]);
 	const [, navigate] = useLocation();
 
 	const getQueryParams = () => {
@@ -18,15 +20,27 @@ export default function MyTicketsPage() {
 			time: params.get("time"),
 		};
 	};
-
 	useEffect(() => {
 		const savedOwnedTickets =
 			JSON.parse(sessionStorage.getItem("ownedTickets")) || [];
 		const savedActiveTickets =
 			JSON.parse(sessionStorage.getItem("activeTickets")) || [];
+		const savedExpiredTickets =
+			JSON.parse(sessionStorage.getItem("expiredTickets")) || [];
+
+		const updatedActiveTickets = savedActiveTickets.map((ticket) => ({
+			...ticket,
+			activatedAt: ticket.activatedAt || new Date().toISOString(),
+		}));
 
 		setOwnedTickets(savedOwnedTickets);
-		setActiveTickets(savedActiveTickets);
+		setActiveTickets(updatedActiveTickets);
+		setExpiredTickets(savedExpiredTickets);
+
+		sessionStorage.setItem(
+			"activeTickets",
+			JSON.stringify(updatedActiveTickets)
+		);
 	}, []);
 
 	useEffect(() => {
@@ -52,7 +66,10 @@ export default function MyTicketsPage() {
 				const updatedOwned = prevOwned.filter(
 					(ticket) => ticket.id !== ticketId
 				);
-				const updatedActive = [...activeTickets, ticketToActivate];
+				const updatedActive = [
+					...activeTickets,
+					{ ...ticketToActivate, activatedAt: new Date().toISOString() }, // Dodaj czas aktywacji
+				];
 
 				sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwned));
 				sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
@@ -61,6 +78,30 @@ export default function MyTicketsPage() {
 				return updatedOwned;
 			}
 			return prevOwned;
+		});
+	};
+
+	const handleExpireTicket = (ticketId) => {
+		setActiveTickets((prevActive) => {
+			const ticketToExpire = prevActive.find(
+				(ticket) => ticket.id === ticketId
+			);
+			if (ticketToExpire) {
+				const updatedActive = prevActive.filter(
+					(ticket) => ticket.id !== ticketId
+				);
+				const updatedExpired = [...expiredTickets, ticketToExpire];
+
+				sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
+				sessionStorage.setItem(
+					"expiredTickets",
+					JSON.stringify(updatedExpired)
+				);
+
+				setExpiredTickets(updatedExpired);
+				return updatedActive;
+			}
+			return prevActive;
 		});
 	};
 
@@ -74,8 +115,11 @@ export default function MyTicketsPage() {
 					{activeTickets.map((ticket) => (
 						<ActivatedTicketCardComponent
 							key={ticket.id}
+							id={ticket.id}
 							price={ticket.price}
 							time={ticket.time}
+							activatedAt={ticket.activatedAt}
+							onExpire={handleExpireTicket}
 						/>
 					))}
 				</div>
@@ -97,7 +141,15 @@ export default function MyTicketsPage() {
 
 			<div className={styles.section}>
 				<h2 className={styles.sectionTitle}>Historia Biletów</h2>
-				<div className={styles.ticketGrid}></div>
+				<div className={styles.ticketGrid}>
+					{expiredTickets.map((ticket) => (
+						<ExpiredTicketCardComponent
+							key={ticket.id}
+							price={ticket.price}
+							time={ticket.time}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);

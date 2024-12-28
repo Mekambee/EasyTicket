@@ -30,12 +30,18 @@ export default function OuterSiteView() {
     setPopupVisible(false);
     setVehiclePopupVisible(true);
   };
-
   const handleVehicleSubmit = () => {
-    const newTicket = { id: Date.now(), price, time, vehicleIdentifier: "HG924" };
+    const newTicket = {
+      id: Date.now(),
+      price,
+      time,
+      vehicleIdentifier: "HG924",
+      activatedAt: new Date().toISOString(), // Dodaj aktywację z bieżącym czasem
+    };
     saveToSessionStorage(newTicket);
     navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
   };
+  
 
   const handlePostpone = () => {
     navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
