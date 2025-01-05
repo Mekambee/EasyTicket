@@ -10,11 +10,11 @@ const getQueryParams = (queryString) => {
   return {
     price: params.get("price"),
     time: params.get("time"),
+	type: params.get("type"),
   };
 };
-
 export default function YourTicketView() {
-  const { price, time } = getQueryParams(window.location.search);
+  const { price, time, type } = getQueryParams(window.location.search);
   const [, navigate] = useLocation();
 
   const [remainingTime, setRemainingTime] = useState(() => {
@@ -46,7 +46,7 @@ export default function YourTicketView() {
   };
 
   const handleBuyAgain = () => {
-    navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
+    navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
   };
 
   const generatePDF = () => {
@@ -58,6 +58,7 @@ export default function YourTicketView() {
     doc.setFontSize(12);
     doc.text(`Cena biletu: ${price} zl`, 20, 40);
     doc.text(`Czas waznosci: ${time}`, 20, 50);
+    doc.text(`Typ biletu: ${type}`, 20, 50);
 
     doc.text("Przewoznik: MPK Krakow", 20, 80);
     doc.text("Strefy: I + II + III", 20, 90);
@@ -90,7 +91,7 @@ export default function YourTicketView() {
 
         <div className={styles.rightSection}>
           <h2>{time}</h2>
-          <p>Ulgowy</p>
+          <h2>{type}</h2>
           <p>MPK Kraków</p>
           <p>strefy I+II+III</p>
           <h3>Cena: {price} zł</h3>

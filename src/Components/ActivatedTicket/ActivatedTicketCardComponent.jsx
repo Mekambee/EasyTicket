@@ -6,6 +6,7 @@ export default function ActivatedTicketCardComponent({
   id,
   price,
   time,
+  type,
   activatedAt,
   onExpire,
 }) {
@@ -32,7 +33,7 @@ export default function ActivatedTicketCardComponent({
 
   const handleShowTicket = () => {
     navigate(
-      `/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`
+      `/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`
     );
   };
 
@@ -46,6 +47,7 @@ export default function ActivatedTicketCardComponent({
     <div className={styles.ticketCard}>
       <h2>{formatTime(remainingTime)}</h2>
 	  {/* *<h2>{remainingTime} s</h2> */}
+	  <h4>{type}</h4>
       <p>MPK Kraków</p>
       <p>strefy I+II+III</p>
       <h3>{price} zł</h3>

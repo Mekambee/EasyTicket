@@ -18,6 +18,7 @@ export default function MyTicketsPage() {
 		return {
 			price: params.get("price"),
 			time: params.get("time"),
+			type: params.get("type"),
 		};
 	};
 	useEffect(() => {
@@ -44,10 +45,10 @@ export default function MyTicketsPage() {
 	}, []);
 
 	useEffect(() => {
-		const { price, time } = getQueryParams();
+		const { price, time, type } = getQueryParams();
 
 		if (price && time) {
-			const newTicket = { id: Date.now(), price, time };
+			const newTicket = { id: Date.now(), price, time, type };
 			setOwnedTickets((prev) => {
 				const updated = [...prev, newTicket];
 				sessionStorage.setItem("ownedTickets", JSON.stringify(updated));
@@ -118,6 +119,7 @@ export default function MyTicketsPage() {
 							id={ticket.id}
 							price={ticket.price}
 							time={ticket.time}
+							type={ticket.type}
 							activatedAt={ticket.activatedAt}
 							onExpire={handleExpireTicket}
 						/>
@@ -133,6 +135,7 @@ export default function MyTicketsPage() {
 							key={ticket.id}
 							price={ticket.price}
 							time={ticket.time}
+							type={ticket.type}
 							onActivate={() => handleActivateTicket(ticket.id)}
 						/>
 					))}
@@ -147,6 +150,7 @@ export default function MyTicketsPage() {
 							key={ticket.id}
 							price={ticket.price}
 							time={ticket.time}
+							type={ticket.type}
 						/>
 					))}
 				</div>

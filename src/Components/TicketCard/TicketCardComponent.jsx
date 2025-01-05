@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./TicketCardStyle.module.css";
 import { useLocation } from "wouter";
 
-export default function TicketCardComponent({ price, time }) {
+export default function TicketCardComponent({ price, time, type }) {
 	const [isTicketBuyPopUpVisible, setTicketBuyPopUpVisible] = useState(false);
 	const [, navigate] = useLocation();
 
@@ -15,12 +15,13 @@ export default function TicketCardComponent({ price, time }) {
 	};
 	const handleOptionClick = () => {
 		setTicketBuyPopUpVisible(false);
-		navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
+		navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
 	};
 
 	return (
 		<div className={styles.ticketCard}>
 			<h2>{time}</h2>
+			<h4>{type}</h4>
 			<p>MPK Kraków</p>
 			<p>strefy I+II+III</p>
 			<h3>{price} zł</h3>

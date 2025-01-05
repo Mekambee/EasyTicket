@@ -33,26 +33,28 @@ export default function BuyTicketView() {
 				</div>
 				{discountFlag ? (
 					<div className={styles.ticketGrid}>
-						<TicketCardComponent price="4" time="20 min"></TicketCardComponent>
-						<TicketCardComponent price="6" time="60 min"></TicketCardComponent>
-						<TicketCardComponent price="8" time="90 min"></TicketCardComponent>
-						<TicketCardComponent price="199" time="1 msc"></TicketCardComponent>
-						<TicketCardComponent price="398" time="2 msc"></TicketCardComponent>
-						<TicketCardComponent price="597" time="3 msc"></TicketCardComponent>
+						<TicketCardComponent price="4" time="20 min" type="Normalny"></TicketCardComponent>
+						<TicketCardComponent price="6" time="60 min" type="Normalny"></TicketCardComponent>
+						<TicketCardComponent price="8" time="90 min" type="Normalny"></TicketCardComponent>
+						<TicketCardComponent price="199" time="1 msc" type="Normalny"></TicketCardComponent>
+						<TicketCardComponent price="398" time="2 msc" type="Normalny"></TicketCardComponent>
+						<TicketCardComponent price="597" time="3 msc" type="Normalny"></TicketCardComponent>
 					</div>
 				) : (
 					<div className={styles.ticketGrid}>
-						<TicketCardComponent price="2" time="20 min"></TicketCardComponent>
-						<TicketCardComponent price="3" time="60 min"></TicketCardComponent>
-						<TicketCardComponent price="4" time="90 min"></TicketCardComponent>
+						<TicketCardComponent price="2" time="20 min" type="Ulgowy"></TicketCardComponent>
+						<TicketCardComponent price="3" time="60 min" type="Ulgowy"></TicketCardComponent>
+						<TicketCardComponent price="4" time="90 min" type="Ulgowy"></TicketCardComponent>
 						<TicketCardComponent
 							price="99,50"
 							time="1 msc"
+							type="Ulgowy"
 						></TicketCardComponent>
-						<TicketCardComponent price="199" time="2 msc"></TicketCardComponent>
+						<TicketCardComponent price="199" time="2 msc" type="Ulgowy"></TicketCardComponent>
 						<TicketCardComponent
 							price="298,50"
 							time="3 msc"
+							type="Ulgowy"
 						></TicketCardComponent>
 					</div>
 				)}

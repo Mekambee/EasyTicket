@@ -7,6 +7,7 @@ const getQueryParams = (queryString) => {
   return {
     price: params.get("price"),
     time: params.get("time"),
+    type: params.get("type"),
   };
 };
 
@@ -15,7 +16,7 @@ export default function OuterSiteView() {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isVehiclePopupVisible, setVehiclePopupVisible] = useState(false);
 
-  const { price, time } = getQueryParams(window.location.search);
+  const { price, time, type } = getQueryParams(window.location.search);
 
   const saveToSessionStorage = (ticket) => {
     const savedTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
@@ -35,22 +36,22 @@ export default function OuterSiteView() {
       id: Date.now(),
       price,
       time,
+      type,
       vehicleIdentifier: "HG924",
       activatedAt: new Date().toISOString(), // Dodaj aktywację z bieżącym czasem
     };
     saveToSessionStorage(newTicket);
-    navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
+    navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
   };
   
 
   const handlePostpone = () => {
-    navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
+    navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>Twój Bank</div>
-
       <div className={styles.content}>
         <p className={styles.infoText}>
           Ta strona nie jest częścią testu, ponieważ jest <br />
