@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./YourTicketStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import { useLocation } from "wouter";
+import { jsPDF } from "jspdf";
 
 const getQueryParams = (queryString) => {
   const params = new URLSearchParams(queryString);
@@ -47,6 +48,25 @@ export default function YourTicketView() {
     navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}`);
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Potwierdzenie Zakupu Biletu", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Cena biletu: ${price} zl`, 20, 40);
+    doc.text(`Czas waznosci: ${time}`, 20, 50);
+
+    doc.text("Przewoznik: MPK Krakow", 20, 80);
+    doc.text("Strefy: I + II + III", 20, 90);
+
+    const currentDate = new Date().toLocaleString();
+    doc.text(`Data wygenerowania: ${currentDate}`, 20, 110);
+
+    doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
+  };
+
   return (
     <div>
       <TopBarComponent />
@@ -73,7 +93,7 @@ export default function YourTicketView() {
             <button className={styles.buyAgainButton} onClick={handleBuyAgain}>
               Kup Ponownie
             </button>
-            <button className={styles.invoiceButton}>Pobierz Fakturę</button>
+            <button className={styles.invoiceButton} onClick={generatePDF}>Pobierz Fakturę</button>
           </div>
         </div>
       </div>
