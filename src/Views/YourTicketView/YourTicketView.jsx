@@ -3,6 +3,7 @@ import styles from "./YourTicketStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import { useLocation } from "wouter";
 import { jsPDF } from "jspdf";
+import qr_code_icon from "../../assets/qr_code.svg";
 
 const getQueryParams = (queryString) => {
   const params = new URLSearchParams(queryString);
@@ -73,7 +74,11 @@ export default function YourTicketView() {
       <div className={styles.ticketContent}>
         <div className={styles.leftSection}>
           <div className={styles.qrCodePlaceholder}>
-            <p>QR Code</p>
+			<img
+				className={styles.buttonImg}
+				src={qr_code_icon}
+				alt="QR code Icon"
+			/>
           </div>
           <div className={styles.ticketInfo}>
             <p>Pozostały czas:</p>
