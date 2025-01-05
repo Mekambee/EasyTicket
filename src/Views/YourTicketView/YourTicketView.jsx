@@ -6,103 +6,137 @@ import { jsPDF } from "jspdf";
 import qr_code_icon from "../../assets/qr_code.svg";
 
 const getQueryParams = (queryString) => {
-  const params = new URLSearchParams(queryString);
-  return {
-    price: params.get("price"),
-    time: params.get("time"),
-	type: params.get("type"),
-  };
+	const params = new URLSearchParams(queryString);
+	return {
+		price: params.get("price"),
+		time: params.get("time"),
+		type: params.get("type"),
+	};
 };
 export default function YourTicketView() {
-  const { price, time, type } = getQueryParams(window.location.search);
-  const [, navigate] = useLocation();
+	const { price, time, type } = getQueryParams(window.location.search);
+	const [, navigate] = useLocation();
 
-  const [remainingTime, setRemainingTime] = useState(() => {
-    const activeTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
-    const ticket = activeTickets.find((t) => t.price === price && t.time === time);
+	const [remainingTime, setRemainingTime] = useState(() => {
+		const activeTickets =
+			JSON.parse(sessionStorage.getItem("activeTickets")) || [];
+		const ticket = activeTickets.find(
+			(t) => t.price === price && t.time === time
+		);
 
-    if (ticket) {
-      const now = Math.floor(Date.now() / 1000);
-      const activationTime = Math.floor(new Date(ticket.activatedAt).getTime() / 1000);
-      const totalTime = parseInt(ticket.time);
-      return Math.max(totalTime - (now - activationTime), 0);
-    }
+		if (ticket) {
+			const now = Math.floor(Date.now() / 1000);
+			const activationTime = Math.floor(
+				new Date(ticket.activatedAt).getTime() / 1000
+			);
+			const totalTime = parseInt(ticket.time);
+			return Math.max(totalTime - (now - activationTime), 0);
+		}
 
-    return 0; 
-  });
+		return 0;
+	});
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRemainingTime((prev) => Math.max(prev - 1, 0));
-    }, 1000);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setRemainingTime((prev) => Math.max(prev - 1, 0));
+		}, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+		return () => clearInterval(interval);
+	}, []);
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}m ${remainingSeconds}s`;
-  };
+	const formatTime = (seconds) => {
+		const minutes = Math.floor(seconds / 60);
+		const remainingSeconds = seconds % 60;
+		return `${minutes}m ${remainingSeconds}s`;
+	};
 
-  const handleBuyAgain = () => {
-    navigate(`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
-  };
+	const handleBuyAgain = () => {
+		navigate(
+			`/outer-site?price=${encodeURIComponent(price)}&time=${encodeURIComponent(
+				time
+			)}&type=${encodeURIComponent(type)}`
+		);
+	};
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
+	const generatePDF = () => {
+		const doc = new jsPDF();
 
-    doc.setFontSize(18);
-    doc.text("Potwierdzenie Zakupu Biletu", 20, 20);
+		doc.setFont("Arial", "bold");
 
-    doc.setFontSize(12);
-    doc.text(`Cena biletu: ${price} zl`, 20, 40);
-    doc.text(`Czas waznosci: ${time}`, 20, 50);
-    doc.text(`Typ biletu: ${type}`, 20, 50);
+		doc.setFillColor(220, 220, 220);
+		doc.rect(0, 0, 210, 297, "F");
 
-    doc.text("Przewoznik: MPK Krakow", 20, 80);
-    doc.text("Strefy: I + II + III", 20, 90);
+		doc.setFillColor(0, 51, 153);
+		doc.rect(0, 0, 210, 20, "F");
+		doc.setTextColor(255, 255, 255);
+		doc.setFontSize(18);
+		doc.text("EasyTicket", 105, 13, { align: "center" });
 
-    const currentDate = new Date().toLocaleString();
-    doc.text(`Data wygenerowania: ${currentDate}`, 20, 110);
+		doc.setTextColor(0, 0, 0);
+		doc.setFontSize(16);
+		doc.text("Potwierdzenie Zakupu Biletu", 105, 40, { align: "center" });
 
-    doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
-  };
+		doc.setFontSize(14);
+		const ticketDetails = [
+			`Cena biletu: ${price} zl`,
+			`Czas waznosci: ${time}`,
+			`Typ biletu: ${type}`,
+			"Przewoznik: MPK Kraków",
+			"Strefy: I + II + III",
+		];
 
-  return (
-    <div>
-      <TopBarComponent />
-      <div className={styles.ticketContent}>
-        <div className={styles.leftSection}>
-          <div className={styles.qrCodePlaceholder}>
-			<img
-				className={styles.buttonImg}
-				src={qr_code_icon}
-				alt="QR code Icon"
-			/>
-          </div>
-          <div className={styles.ticketInfo}>
-            <p>Pozostały czas:</p>
-            <p>{formatTime(remainingTime)}</p>
-            <p>Identyfikator pojazdu:</p>
-            <p>HG924</p>
-          </div>
-        </div>
+		let yOffset = 60;
+		ticketDetails.forEach((line) => {
+			doc.text(line, 10, yOffset);
+			yOffset += 10;
+		});
 
-        <div className={styles.rightSection}>
-          <h2>{time}</h2>
-          <h2>{type}</h2>
-          <p>MPK Kraków</p>
-          <p>strefy I+II+III</p>
-          <h3>Cena: {price} zł</h3>
-          <div className={styles.buttons}>
-            <button className={styles.buyAgainButton} onClick={handleBuyAgain}>
-              Kup Ponownie
-            </button>
-            <button className={styles.invoiceButton} onClick={generatePDF}>Pobierz Fakturę</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+		const currentDate = new Date().toLocaleString("pl-PL");
+		doc.text(`Data wygenerowania potwierdzenia: ${currentDate}`, 105, 125, {
+			align: "center",
+		});
+
+		doc.text("Dziekujemy za skorzystanie z naszych uslug!", 105, 140 , { align: "center" });
+
+		doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
+	};
+
+	return (
+		<div>
+			<TopBarComponent />
+			<div className={styles.ticketContent}>
+				<div className={styles.leftSection}>
+					<div className={styles.qrCodePlaceholder}>
+						<img
+							className={styles.buttonImg}
+							src={qr_code_icon}
+							alt="QR code Icon"
+						/>
+					</div>
+					<div className={styles.ticketInfo}>
+						<p>Pozostały czas:</p>
+						<p>{formatTime(remainingTime)}</p>
+						<p>Identyfikator pojazdu:</p>
+						<p>HG924</p>
+					</div>
+				</div>
+
+				<div className={styles.rightSection}>
+					<h2>{time}</h2>
+					<h2>{type}</h2>
+					<p>MPK Kraków</p>
+					<p>strefy I+II+III</p>
+					<h3>Cena: {price} zł</h3>
+					<div className={styles.buttons}>
+						<button className={styles.buyAgainButton} onClick={handleBuyAgain}>
+							Kup Ponownie
+						</button>
+						<button className={styles.invoiceButton} onClick={generatePDF}>
+							Pobierz Fakturę
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
