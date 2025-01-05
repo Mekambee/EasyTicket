@@ -6,32 +6,49 @@
 	text-align: center;
 }
 .content {
-	height: 90vh;
+	position: relative;
+	height: 100vh;
 	margin-top: 30px;
 }
 .ticketGrid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* 3 kolumny o równej szerokości */
-	gap: 20px; /* Odstępy między kartami */
-	padding: 20px;
-	max-width: 900px; /* Ograniczenie szerokości kontenera */
-	margin: 0 auto; /* Wyśrodkowanie na stronie */
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	padding: 15px;
+	max-width: 900px;
+	margin: 0 auto;
 	justify-items: center;
 }
-.toggleContainer {
-	display: flex;
-	justify-content: center;
-	margin: 20px 0;
+.toggleButtonsContainer {
+	position: relative;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 500px;
 }
-
+.questionMarkContainer {
+	position: absolute;
+	top: 3px;
+	right: 40px;
+	width: 50px;
+}
+.questionMarkButton {
+	border: none;
+	background-color: var(--bg-grey);
+	cursor: pointer;
+}
 .toggleButton {
+	width: 150px;
 	flex: 1;
 	padding: 10px;
 	font-size: 16px;
 	background-color: var(--bg-color);
-	border: 1px solid var(--bg-grey);
+	border: 1px solid black;
+	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s ease, color 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	margin: 0 5px;
 }
 
 .toggleButton.active {
@@ -40,12 +57,12 @@
 }
 @media (max-width: 1000px) {
 	.ticketGrid {
-		grid-template-columns: repeat(2, 1fr); /* 2 kolumny */
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
 @media (max-width: 768px) {
 	.ticketGrid {
-		grid-template-columns: 1fr; /* Jedna kolumna na małych ekranach */
+		grid-template-columns: 1fr;
 	}
 }

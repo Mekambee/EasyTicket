@@ -8,6 +8,7 @@ import SearchRouteView from "../SearchRoute/SearchRouteView";
 import TimetableView from "../Timetable/TimetableView.tsx";
 import OuterSiteView from "../OuterSite/OuterSiteView";
 import YourTicketView from "../YourTicketView/YourTicketView";
+import TicketsFaqView from "../TicketsFAQ/TicketsFaqView.jsx";
 
 const AppRoutes = () => {
 	return (
@@ -33,6 +34,9 @@ const AppRoutes = () => {
 				</Route>
 				<Route path="/your-ticket">
 					<YourTicketView />
+				</Route>
+				<Route path="/tickets-faq">
+					<TicketsFaqView />
 				</Route>
 			</Switch>
 		</Router>
