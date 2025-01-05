@@ -96,7 +96,9 @@ export default function YourTicketView() {
 			align: "center",
 		});
 
-		doc.text("Dziekujemy za skorzystanie z naszych uslug!", 105, 140 , { align: "center" });
+		doc.text("Dziekujemy za skorzystanie z naszych uslug!", 105, 140, {
+			align: "center",
+		});
 
 		doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
 	};
@@ -114,24 +116,35 @@ export default function YourTicketView() {
 						/>
 					</div>
 					<div className={styles.ticketInfo}>
-						<p>Pozostały czas:</p>
-						<p>{formatTime(remainingTime)}</p>
-						<p>Identyfikator pojazdu:</p>
-						<p>HG924</p>
+						<p className={styles.paragraph}>Pozostały czas:</p>
+						<p className={styles.redParagraph}>{formatTime(remainingTime)}</p>
+						<p className={styles.paragraph}>Identyfikator pojazdu:</p>
+						<p className={`${styles.paragraph} ${styles.bolded}`}>HG924</p>
 					</div>
 				</div>
 
 				<div className={styles.rightSection}>
-					<h2>{time}</h2>
-					<h2>{type}</h2>
-					<p>MPK Kraków</p>
-					<p>strefy I+II+III</p>
-					<h3>Cena: {price} zł</h3>
+					<p
+						className={`${styles.paragraph} ${styles.bolded} ${styles.enlarge}`}
+					>
+						{time}
+					</p>
+					<p className={`${styles.paragraph} ${styles.bolded}`}>{type}</p>
+					<p className={styles.paragraph}>MPK Kraków</p>
+					<p className={styles.paragraph}>strefy I+II+III</p>
+					<p
+						className={`${styles.paragraph} ${styles.bolded} ${styles.enlarge}`}
+					>
+						Cena: {price} zł
+					</p>
 					<div className={styles.buttons}>
-						<button className={styles.buyAgainButton} onClick={handleBuyAgain}>
+						<button
+							className={styles.yourTicketButton}
+							onClick={handleBuyAgain}
+						>
 							Kup Ponownie
 						</button>
-						<button className={styles.invoiceButton} onClick={generatePDF}>
+						<button className={styles.yourTicketButton} onClick={generatePDF}>
 							Pobierz Fakturę
 						</button>
 					</div>
