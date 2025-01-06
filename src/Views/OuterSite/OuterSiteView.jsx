@@ -41,7 +41,7 @@ export default function OuterSiteView() {
       time,
       type,
       vehicleIdentifier: "HG924",
-      activatedAt: new Date().toISOString(), // Dodaj aktywację z bieżącym czasem
+      activatedAt: new Date().toISOString(), 
     };
     saveToSessionStorage(newTicket);
     navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}&id=${newTicket.id}`);

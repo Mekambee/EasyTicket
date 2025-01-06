@@ -21,12 +21,7 @@ export default function YourTicketView() {
 	const [remainingTime, setRemainingTime] = useState(() => {
 		const activeTickets =
 			JSON.parse(sessionStorage.getItem("activeTickets")) || [];
-		// const ticket = activeTickets.find(
-		// 	(t) => t.price === price && t.time === time
-		// );
-		const ticket = activeTickets.find(
-			(t) => t.id === parseInt(id)
-		);
+		const ticket = activeTickets.find((t) => t.id === parseInt(id));
 
 		if (ticket) {
 			const now = Math.floor(Date.now() / 1000);
@@ -62,25 +57,44 @@ export default function YourTicketView() {
 		);
 	};
 
-	//dodane
-	// const handleFreezeTicket = () => {
-	// 	const activeTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
-	// 	const ownedTickets = JSON.parse(sessionStorage.getItem("ownedTickets")) || [];
-	// 	const ticket = activeTickets.find((t) => t.id === parseInt(id));
+	const handleFreezeTicket = () => {
+		const activeTickets =
+			JSON.parse(sessionStorage.getItem("activeTickets")) || [];
+		const ownedTickets =
+			JSON.parse(sessionStorage.getItem("ownedTickets")) || [];
+		const ticket = activeTickets.find((t) => t.id === parseInt(id));
 
-	// 	if (ticket) {
-	// 		// Aktualizuj aktywne i przenieś do posiadanych
-	// 		const updatedActiveTickets = activeTickets.filter((t) => t.id !== parseInt(id));
-	// 		const updatedOwnedTickets = [...ownedTickets, { ...ticket, time: remainingTime }];
+		if (ticket) {
+			if (ticket.isFrozen) {
+				alert("Ten bilet został już zamrożony.");
+				return;
+			}
 
-	// 		sessionStorage.setItem("activeTickets", JSON.stringify(updatedActiveTickets));
-	// 		sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwnedTickets));
+			const updatedActiveTickets = activeTickets.filter(
+				(t) => t.id !== parseInt(id)
+			);
+			const updatedOwnedTickets = [
+				...ownedTickets,
+				{
+					...ticket,
+					time: remainingTime, 
+					isFrozen: true, 
+					originalTime: ticket.originalTime || time, 
+				},
+			];
 
-	// 		// Nawigacja do "MyTicketsPage"
-	// 		navigate("/my-tickets");
-	// 	}
-	// };
+			sessionStorage.setItem(
+				"activeTickets",
+				JSON.stringify(updatedActiveTickets)
+			);
+			sessionStorage.setItem(
+				"ownedTickets",
+				JSON.stringify(updatedOwnedTickets)
+			);
 
+			navigate("/my-tickets");
+		}
+	};
 
 	const generatePDF = () => {
 		const doc = new jsPDF();
@@ -141,7 +155,9 @@ export default function YourTicketView() {
 					</div>
 					<div className={styles.ticketInfo}>
 						<p className={styles.paragraph}>Pozostały czas:</p>
-						<p className={styles.redParagraph}>{(remainingTime === 0) ? "Nieaktywny" : formatTime(remainingTime) }</p>
+						<p className={styles.redParagraph}>
+							{remainingTime === 0 ? "Nieaktywny" : formatTime(remainingTime)}
+						</p>
 						<p className={styles.paragraph}>Identyfikator pojazdu:</p>
 						<p className={`${styles.paragraph} ${styles.bolded}`}>HG924</p>
 					</div>
@@ -171,9 +187,19 @@ export default function YourTicketView() {
 						<button className={styles.yourTicketButton} onClick={generatePDF}>
 							Pobierz Fakturę
 						</button>
+						{remainingTime > 5 && (
+							<button
+								className={styles.yourTicketButton}
+								onClick={handleFreezeTicket}
+								disabled={remainingTime <= 0} 
+							>
+								Zamróź Bilet
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
