@@ -33,7 +33,7 @@ export default function ActivatedTicketCardComponent({
 
   const handleShowTicket = () => {
     navigate(
-      `/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`
+      `/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}&id=${id}`
     );
   };
 

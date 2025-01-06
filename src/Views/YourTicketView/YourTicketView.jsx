@@ -8,20 +8,24 @@ import qr_code_icon from "../../assets/qr_code.svg";
 const getQueryParams = (queryString) => {
 	const params = new URLSearchParams(queryString);
 	return {
+		id: params.get("id"),
 		price: params.get("price"),
 		time: params.get("time"),
 		type: params.get("type"),
 	};
 };
 export default function YourTicketView() {
-	const { price, time, type } = getQueryParams(window.location.search);
+	const { id, price, time, type } = getQueryParams(window.location.search);
 	const [, navigate] = useLocation();
 
 	const [remainingTime, setRemainingTime] = useState(() => {
 		const activeTickets =
 			JSON.parse(sessionStorage.getItem("activeTickets")) || [];
+		// const ticket = activeTickets.find(
+		// 	(t) => t.price === price && t.time === time
+		// );
 		const ticket = activeTickets.find(
-			(t) => t.price === price && t.time === time
+			(t) => t.id === parseInt(id)
 		);
 
 		if (ticket) {
@@ -57,6 +61,26 @@ export default function YourTicketView() {
 			)}&type=${encodeURIComponent(type)}`
 		);
 	};
+
+	//dodane
+	// const handleFreezeTicket = () => {
+	// 	const activeTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
+	// 	const ownedTickets = JSON.parse(sessionStorage.getItem("ownedTickets")) || [];
+	// 	const ticket = activeTickets.find((t) => t.id === parseInt(id));
+
+	// 	if (ticket) {
+	// 		// Aktualizuj aktywne i przenieś do posiadanych
+	// 		const updatedActiveTickets = activeTickets.filter((t) => t.id !== parseInt(id));
+	// 		const updatedOwnedTickets = [...ownedTickets, { ...ticket, time: remainingTime }];
+
+	// 		sessionStorage.setItem("activeTickets", JSON.stringify(updatedActiveTickets));
+	// 		sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwnedTickets));
+
+	// 		// Nawigacja do "MyTicketsPage"
+	// 		navigate("/my-tickets");
+	// 	}
+	// };
+
 
 	const generatePDF = () => {
 		const doc = new jsPDF();
@@ -117,7 +141,7 @@ export default function YourTicketView() {
 					</div>
 					<div className={styles.ticketInfo}>
 						<p className={styles.paragraph}>Pozostały czas:</p>
-						<p className={styles.redParagraph}>{formatTime(remainingTime)}</p>
+						<p className={styles.redParagraph}>{(remainingTime === 0) ? "Nieaktywny" : formatTime(remainingTime) }</p>
 						<p className={styles.paragraph}>Identyfikator pojazdu:</p>
 						<p className={`${styles.paragraph} ${styles.bolded}`}>HG924</p>
 					</div>

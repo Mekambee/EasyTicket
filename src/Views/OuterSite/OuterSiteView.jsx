@@ -18,6 +18,8 @@ export default function OuterSiteView() {
 
   const { price, time, type } = getQueryParams(window.location.search);
 
+  const ticketID = Date.now();
+
   const saveToSessionStorage = (ticket) => {
     const savedTickets = JSON.parse(sessionStorage.getItem("activeTickets")) || [];
     sessionStorage.setItem("activeTickets", JSON.stringify([...savedTickets, ticket]));
@@ -33,7 +35,8 @@ export default function OuterSiteView() {
   };
   const handleVehicleSubmit = () => {
     const newTicket = {
-      id: Date.now(),
+      // id: Date.now(),
+      id: ticketID,
       price,
       time,
       type,
@@ -41,12 +44,11 @@ export default function OuterSiteView() {
       activatedAt: new Date().toISOString(), // Dodaj aktywację z bieżącym czasem
     };
     saveToSessionStorage(newTicket);
-    navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
+    navigate(`/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}&id=${newTicket.id}`);
   };
   
-
   const handlePostpone = () => {
-    navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}`);
+    navigate(`/my-tickets?price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&type=${encodeURIComponent(type)}&id=${ticketID}`);
   };
 
   return (

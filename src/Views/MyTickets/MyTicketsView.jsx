@@ -19,6 +19,7 @@ export default function MyTicketsPage() {
 			price: params.get("price"),
 			time: params.get("time"),
 			type: params.get("type"),
+			id: params.get("id"),
 		};
 	};
 	useEffect(() => {
@@ -45,7 +46,7 @@ export default function MyTicketsPage() {
 	}, []);
 
 	useEffect(() => {
-		const { price, time, type } = getQueryParams();
+		const { price, time, type} = getQueryParams();
 
 		if (price && time) {
 			const newTicket = { id: Date.now(), price, time, type };
@@ -82,29 +83,56 @@ export default function MyTicketsPage() {
 		});
 	};
 
+	// const handleExpireTicket = (ticketId) => {
+	// 	setActiveTickets((prevActive) => {
+	// 		const ticketToExpire = prevActive.find(
+	// 			(ticket) => ticket.id === ticketId
+	// 		);
+	// 		if (ticketToExpire) {
+	// 			const updatedActive = prevActive.filter(
+	// 				(ticket) => ticket.id !== ticketId
+	// 			);
+	// 			const updatedExpired = [...expiredTickets, ticketToExpire];
+
+	// 			sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
+	// 			sessionStorage.setItem(
+	// 				"expiredTickets",
+	// 				JSON.stringify(updatedExpired)
+	// 			);
+
+	// 			setExpiredTickets(updatedExpired);
+	// 			return updatedActive;
+	// 		}
+	// 		return prevActive;
+	// 	});
+	// };
+
 	const handleExpireTicket = (ticketId) => {
 		setActiveTickets((prevActive) => {
-			const ticketToExpire = prevActive.find(
-				(ticket) => ticket.id === ticketId
-			);
-			if (ticketToExpire) {
-				const updatedActive = prevActive.filter(
-					(ticket) => ticket.id !== ticketId
-				);
-				const updatedExpired = [...expiredTickets, ticketToExpire];
-
-				sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
-				sessionStorage.setItem(
-					"expiredTickets",
-					JSON.stringify(updatedExpired)
-				);
-
-				setExpiredTickets(updatedExpired);
-				return updatedActive;
-			}
-			return prevActive;
+		  // Znajdujemy bilet na podstawie id
+		  const ticketToExpire = prevActive.find((ticket) => ticket.id === ticketId);
+	  
+		  if (ticketToExpire) {
+			// Usuwamy bilet z aktywnych
+			const updatedActive = prevActive.filter((ticket) => ticket.id !== ticketId);
+	  
+			// Dodajemy bilet do wygasłych
+			const updatedExpired = [...expiredTickets, ticketToExpire];
+	  
+			// Aktualizujemy sessionStorage
+			sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
+			sessionStorage.setItem("expiredTickets", JSON.stringify(updatedExpired));
+	  
+			// Aktualizujemy stany komponentu
+			setExpiredTickets(updatedExpired);
+	  
+			return updatedActive;
+		  }
+	  
+		  return prevActive;
 		});
-	};
+	  };
+	  
 
 	return (
 		<div className={styles.container}>
@@ -137,6 +165,7 @@ export default function MyTicketsPage() {
 							time={ticket.time}
 							type={ticket.type}
 							onActivate={() => handleActivateTicket(ticket.id)}
+							id={ticket.id}
 						/>
 					))}
 				</div>
@@ -151,6 +180,7 @@ export default function MyTicketsPage() {
 							price={ticket.price}
 							time={ticket.time}
 							type={ticket.type}
+							id={ticket.id}
 						/>
 					))}
 				</div>

@@ -2,14 +2,14 @@ import React from "react";
 import { useLocation } from "wouter";
 import styles from "./ExpiredTicketCardStyle.module.css";
 
-export default function ExpiredTicketCardComponent({ price, time, type }) {
+export default function ExpiredTicketCardComponent({ price, time, type, id }) {
   const [, navigate] = useLocation();
 
   const handleShowTicket = () => {
     navigate(
       `/your-ticket?price=${encodeURIComponent(price)}&time=${encodeURIComponent(
         time
-      )}&type=${encodeURIComponent(type)}`
+      )}&type=${encodeURIComponent(type)}&id=${id}`
     );
   };
 

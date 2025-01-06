@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ActiveTicketCardStyle.module.css";
 
-export default function ActiveTicketCardComponent({ price, time, type, onActivate }) {
+export default function ActiveTicketCardComponent({ price, time, type, onActivate, id }) {
   const [isVehiclePopupVisible, setVehiclePopupVisible] = useState(false);
 
   const handleActivateClick = () => {
