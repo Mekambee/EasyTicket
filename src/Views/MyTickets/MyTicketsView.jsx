@@ -76,37 +76,40 @@ useEffect(() => {
     }
   }
 }, []);
-
-
+  
   const handleActivateTicket = (ticketId) => {
+    console.log("aktywoacja");
     setOwnedTickets((prevOwned) => {
       const ticketToActivate = prevOwned.find(
         (ticket) => ticket.id === ticketId
       );
-
+  
       if (ticketToActivate) {
         const updatedOwned = prevOwned.filter(
           (ticket) => ticket.id !== ticketId
         );
-
+  
         const updatedActive = [
           ...activeTickets,
           {
             ...ticketToActivate,
             activatedAt: new Date().toISOString(),
+            isFrozen: ticketToActivate.isFrozen || false, 
           },
         ];
-
+        console.log(updatedActive);
+  
         sessionStorage.setItem("ownedTickets", JSON.stringify(updatedOwned));
         sessionStorage.setItem("activeTickets", JSON.stringify(updatedActive));
-
+  
         setActiveTickets(updatedActive);
         return updatedOwned;
       }
       return prevOwned;
     });
   };
-
+  
+  
   const handleExpireTicket = (ticketId) => {
     setActiveTickets((prevActive) => {
       const ticketToExpire = prevActive.find(
@@ -155,6 +158,7 @@ useEffect(() => {
               time={ticket.time}
               type={ticket.type}
               activatedAt={ticket.activatedAt}
+              isFrozen={ticket.isFrozen}
               onExpire={handleExpireTicket}
             />
           ))}

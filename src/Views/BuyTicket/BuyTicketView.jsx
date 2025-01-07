@@ -94,7 +94,7 @@ export default function BuyTicketView() {
 							type="Ulgowy"
 						></TicketCardComponent>
 						<TicketCardComponent
-							price="99,50"
+							price="99"
 							time="1 msc"
 							type="Ulgowy"
 						></TicketCardComponent>
@@ -104,7 +104,7 @@ export default function BuyTicketView() {
 							type="Ulgowy"
 						></TicketCardComponent>
 						<TicketCardComponent
-							price="298,50"
+							price="298"
 							time="3 msc"
 							type="Ulgowy"
 						></TicketCardComponent>
