@@ -98,3 +98,83 @@
 	line-height: 1.6;
 	color: red;
 }
+.greenParagraph {
+	font-size: 32px;
+	margin-bottom: 20px;
+	line-height: 1.6;
+	color: green;
+}
+.redParagraphSmaller {
+	font-size: 25px;
+	margin-bottom: 20px;
+	line-height: 1.6;
+	color: red;
+}
+.greenParagraphSmaller {
+	font-size: 25px;
+	margin-bottom: 20px;
+	line-height: 1.6;
+	color: green;
+}
+
+
+
+/* popup style */
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	backdrop-filter: blur(0.25rem);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.popupContent {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	text-align: center;
+	width: 400px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.popupTitle {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.popupText {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.popupGrid {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.popupGrid button {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.popupGrid button:hover {
+	background-color: #218838;
+}
