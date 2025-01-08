@@ -208,11 +208,14 @@ export default function YourTicketView() {
 							: ""}
 					</p>
 					<div className={styles.qrCodePlaceholder}>
+						{remainingTime > 0 ? (
 						<img
 							className={styles.buttonImg}
 							src={qr_code_icon}
 							alt="QR code Icon"
-						/>
+						/>) : (<p className={styles.redParagraphSmaller}>Bilet stracił ważność <br /><br />
+						Kod QR niedostępny</p>)
+						}
 					</div>
 					<div className={styles.ticketInfo}>
 						<p className={styles.paragraph}>Pozostały czas:</p>
