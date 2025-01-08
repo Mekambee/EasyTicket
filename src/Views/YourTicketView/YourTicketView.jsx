@@ -4,6 +4,7 @@ import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import { useLocation } from "wouter";
 import { jsPDF } from "jspdf";
 import qr_code_icon from "../../assets/qr_code.svg";
+import Roboto from "../../assets/fonts/Roboto-Regular.ttf";
 
 const getQueryParams = (queryString) => {
 	const params = new URLSearchParams(queryString);
@@ -99,7 +100,6 @@ export default function YourTicketView() {
 
 		if (ticket) {
 			if (ticket.isFrozen) {
-				// alert("Ten bilet został już zamrożony.");
 				setPopupVisible(true);
 				return;
 			}
@@ -133,49 +133,60 @@ export default function YourTicketView() {
 		}
 	};
 
-	const generatePDF = () => {
+	const generatePDF = async () => {
 		const doc = new jsPDF();
 
-		doc.setFont("Arial", "bold");
+		try {
+			const response = await fetch(Roboto);
+			const fontBuffer = await response.arrayBuffer();
 
-		doc.setFillColor(220, 220, 220);
-		doc.rect(0, 0, 210, 297, "F");
+			const fontBase64 = arrayBufferToBase64(fontBuffer);
 
-		doc.setFillColor(0, 51, 153);
-		doc.rect(0, 0, 210, 20, "F");
-		doc.setTextColor(255, 255, 255);
-		doc.setFontSize(18);
-		doc.text("EasyTicket", 105, 13, { align: "center" });
+			doc.addFileToVFS("Roboto-Regular.ttf", fontBase64);
+			doc.addFont("Roboto-Regular.ttf", "Roboto", "normal");
+			doc.setFont("Roboto", "normal");
 
-		doc.setTextColor(0, 0, 0);
-		doc.setFontSize(16);
-		doc.text("Potwierdzenie Zakupu Biletu", 105, 40, { align: "center" });
+			doc.setFillColor(220, 220, 220);
+			doc.rect(0, 0, 210, 297, "F");
 
-		doc.setFontSize(14);
-		const ticketDetails = [
-			`Cena biletu: ${price} zł`,
-			`Czas ważności: ${isFrozen ? originalTime : time}`,
-			`Typ biletu: ${type}`,
-			"Przewoźnik: MPK Kraków",
-			"Strefy: I + II + III",
-		];
+			doc.setFillColor(0, 51, 153);
+			doc.rect(0, 0, 210, 20, "F");
+			doc.setTextColor(255, 255, 255);
+			doc.setFontSize(18);
+			doc.text("EasyTicket", 105, 13, { align: "center" });
 
-		let yOffset = 60;
-		ticketDetails.forEach((line) => {
-			doc.text(line, 10, yOffset);
-			yOffset += 10;
-		});
+			doc.setTextColor(0, 0, 0);
+			doc.setFontSize(16);
+			doc.text("Potwierdzenie Zakupu Biletu", 105, 40, { align: "center" });
 
-		const currentDate = new Date().toLocaleString("pl-PL");
-		doc.text(`Data wygenerowania potwierdzenia: ${currentDate}`, 105, 125, {
-			align: "center",
-		});
+			doc.setFontSize(14);
+			const ticketDetails = [
+				`Cena biletu: ${price} zł`,
+				`Czas ważności: ${isFrozen ? originalTime : time}`,
+				`Typ biletu: ${type}`,
+				"Przewoźnik: MPK Kraków",
+				"Strefy: I + II + III",
+			];
 
-		doc.text("Dziękujemy za skorzystanie z naszych usług!", 105, 140, {
-			align: "center",
-		});
+			let yOffset = 60;
+			ticketDetails.forEach((line) => {
+				doc.text(line, 10, yOffset);
+				yOffset += 10;
+			});
 
-		doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
+			const currentDate = new Date().toLocaleString("pl-PL");
+			doc.text(`Data wygenerowania potwierdzenia: ${currentDate}`, 105, 125, {
+				align: "center",
+			});
+
+			doc.text("Dziękujemy za skorzystanie z naszych usług!", 105, 140, {
+				align: "center",
+			});
+
+			doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
+		} catch (error) {
+			alert(error);
+		}
 	};
 
 	return (
@@ -185,10 +196,12 @@ export default function YourTicketView() {
 				<div className={styles.leftSection}>
 					<p
 						className={`${
-							isFrozen ? styles.redParagraphSmaller : styles.greenParagraphSmaller
+							isFrozen
+								? styles.redParagraphSmaller
+								: styles.greenParagraphSmaller
 						}`}
 					>
-						{(remainingTime > 5 && price > 90)
+						{remainingTime > 5 && price > 90
 							? isFrozen
 								? "Liczba dostępnych zamrożeń : 0"
 								: "Liczba dostępnych zamrożeń : 1"
@@ -247,19 +260,19 @@ export default function YourTicketView() {
 				</div>
 			</div>
 
-				  {isPopupVisible && (
-					<div className={styles.popup}>
-					  <div className={styles.popupContent}>
+			{isPopupVisible && (
+				<div className={styles.popup}>
+					<div className={styles.popupContent}>
 						<h2 className={styles.popupTitle}>Ostrzeżenie</h2>
 						<p className={styles.popupText}>
-						  Nie możesz zamrozić biletu więcej niż jeden raz.
+							Nie możesz zamrozić biletu więcej niż jeden raz.
 						</p>
 						<div className={styles.popupGrid}>
-						  <button onClick={() => setPopupVisible(false)}>Powrót</button>
+							<button onClick={() => setPopupVisible(false)}>Powrót</button>
 						</div>
-					  </div>
 					</div>
-				  )}
+				</div>
+			)}
 		</div>
 	);
 }
@@ -277,3 +290,15 @@ function freezedTicketTimeParser(timeString, activationTime, now) {
 
 	return Math.max(minutes * 60 + seconds - (now - activationTime), 0);
 }
+
+const arrayBufferToBase64 = (buffer) => {
+	let binary = "";
+	const bytes = new Uint8Array(buffer);
+	const len = bytes.byteLength;
+
+	for (let i = 0; i < len; i++) {
+		binary += String.fromCharCode(bytes[i]);
+	}
+
+	return btoa(binary);
+};
