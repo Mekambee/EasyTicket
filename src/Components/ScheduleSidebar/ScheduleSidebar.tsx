@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
 import { Temporal } from "temporal-polyfill";
+import { Link } from "wouter";
 
 import back_icon from "../../assets/back.svg";
 import refresh_icon from "../../assets/refresh.svg";
@@ -22,7 +23,10 @@ export default function ScheduleSidebar({
 }) {
 	const { map, highlighted } = useContext(MapCtx)!;
 	const [refresh_counter, refresh_inner] = useState<number>(0);
-	const refresh = () => (setSchedule(null), refresh_inner((c) => c + 1));
+	const refresh = () => {
+		setSchedule(null);
+		refresh_inner((c) => c + 1);
+	};
 	const [schedule, setSchedule] = useState<StopSchedule | "error" | null>(null);
 	const [tab, setTabInner] = useState<"arrivals" | "schedule">("arrivals");
 	const setTab = (tab: "arrivals" | "schedule") => {
@@ -66,7 +70,7 @@ export default function ScheduleSidebar({
 		return () => {
 			highlighted.value = [];
 		};
-	}, [system, id]);
+	}, [system, highlighted, id]);
 
 	useEffect(() => {
 		let valid = true;
@@ -108,20 +112,17 @@ export default function ScheduleSidebar({
 		return (
 			<>
 				<div className={style.header}>
-					<a
-						className={style.back}
-						onClick={() => navigate(`/timetable/${system}`)}
-					>
+					<Link to="/" className={style.back}>
 						<img className={style.backicon} src={back_icon} alt="wróć" />
-					</a>
+					</Link>
 					<h1 className={style.title}>Błąd</h1>
-					<a className={style.refresh} onClick={() => refresh()}>
+					<button className={style.refresh} onClick={() => refresh()}>
 						<img
 							className={style.refreshicon}
 							src={refresh_icon}
 							alt="odśwież"
 						/>
-					</a>
+					</button>
 				</div>
 			</>
 		);
@@ -130,16 +131,13 @@ export default function ScheduleSidebar({
 	return (
 		<div className={style.wrapper}>
 			<div className={style.header}>
-				<a
-					className={style.back}
-					onClick={() => navigate(`/timetable/${system}`)}
-				>
+				<Link to="/" className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</a>
+				</Link>
 				<h1 className={style.name}>
 					{schedule === null ? "" : schedule?.name}
 				</h1>
-				<a
+				<button
 					className={style.locate}
 					onClick={() =>
 						schedule === null
@@ -155,19 +153,27 @@ export default function ScheduleSidebar({
 						src={locate_icon}
 						alt="pokaż na mapie"
 					/>
-				</a>
+				</button>
 			</div>
 
 			<div className={style.tabs}>
 				<a
+					href="#arrivals"
 					className={`${style.tab} ${tab === "arrivals" ? style.current : ""}`}
-					onClick={() => setTab("arrivals")}
+					onClick={(e) => {
+						e.preventDefault();
+						setTab("arrivals");
+					}}
 				>
 					Odjazdy
 				</a>
 				<a
+					href="#schedule"
 					className={`${style.tab} ${tab === "schedule" ? style.current : ""}`}
-					onClick={() => setTab("schedule")}
+					onClick={(e) => {
+						e.preventDefault();
+						setTab("schedule");
+					}}
 				>
 					Rozkład jazdy
 				</a>

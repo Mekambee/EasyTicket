@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
+import { Link } from "wouter";
 
 import back_icon from "../../assets/back.svg";
 import locate_icon from "../../assets/locate.svg";
@@ -20,7 +21,10 @@ export default function LineSidebar({
 	id: string;
 }) {
 	const [refresh_counter, refresh_inner] = useState<number>(0);
-	const refresh = () => (setSchedule(null), refresh_inner((c) => c + 1));
+	const refresh = () => {
+		setSchedule(null);
+		refresh_inner((c) => c + 1);
+	};
 	const [schedule, setSchedule] = useState<Line | "error" | null>(null);
 	const { map, highlighted, shapes } = useContext(MapCtx)!;
 	useEffect(
@@ -43,21 +47,18 @@ export default function LineSidebar({
 		return () => {
 			shapes.value = [];
 		};
-	}, [system, id, refresh_counter]);
+	}, [system, shapes, id, refresh_counter]);
 
 	if (schedule === "error") {
 		return (
 			<div className={style.header}>
-				<a
-					className={style.back}
-					onClick={() => navigate(`/timetable/${system}`)}
-				>
+				<Link to="/" className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</a>
+				</Link>
 				<h1 className={style.title}>Błąd</h1>
-				<a className={style.refresh} onClick={() => refresh()}>
+				<button className={style.refresh} onClick={() => refresh()}>
 					<img className={style.refreshicon} src={refresh_icon} alt="odśwież" />
-				</a>
+				</button>
 			</div>
 		);
 	}
@@ -65,12 +66,9 @@ export default function LineSidebar({
 	return (
 		<div className={style.wrapper}>
 			<div className={style.header}>
-				<a
-					className={style.back}
-					onClick={() => navigate(`/timetable/${system}`)}
-				>
+				<Link to="/" className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</a>
+				</Link>
 				<div className={style.title}>
 					<h1 className={style.name}>
 						{schedule === null ? "" : schedule?.name}
@@ -79,7 +77,7 @@ export default function LineSidebar({
 						{schedule === null ? "" : schedule?.headsign}
 					</h2>
 				</div>
-				<a
+				<button
 					className={style.locate}
 					onClick={() =>
 						schedule === null
@@ -92,7 +90,7 @@ export default function LineSidebar({
 						src={locate_icon}
 						alt="pokaż na mapie"
 					/>
-				</a>
+				</button>
 			</div>
 
 			<div className={style.content}>

@@ -39,6 +39,8 @@
 	height: 2rem;
 	margin: 0;
 	padding: 0;
+	background: none;
+	border: none;
 }
 
 .refreshicon {
@@ -52,6 +54,8 @@
 	height: 2rem;
 	margin: 0;
 	padding: 0;
+	background: none;
+	border: none;
 }
 
 .locateicon {
@@ -79,6 +83,8 @@
 	height: 1.5rem;
 	border-radius: 1rem 1rem 0 0;
 	border: 1px var(--fg-color) solid;
+	text-decoration: none;
+	color: var(--fg-color);
 }
 
 .tab.current {
