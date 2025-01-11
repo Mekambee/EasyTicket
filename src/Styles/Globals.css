@@ -4,6 +4,7 @@
 		"Open Sans", "Helvetica Neue", sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
+	font-size: 16px;
 
 	--fg-color: #1f2329;
 	--fg-grey: #59636e;
@@ -11,6 +12,7 @@
 	--bg-grey: #f6f8fa;
 	--bg-grey-variant: #b3c5d5;
 	--bg-color: #ffffff;
+	--bg-main: #1030a0;
 	--main-color: #1030a0;
 	--main-color-variant: #0b2274;
 	--external-color: #0fa051;
@@ -27,6 +29,26 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-contrast="higher"] {
+	/* TODO: style for higher contrast */
+	--bg-color: #000000;
+}
+
+:root[data-contrast="highest"] {
+	/* TODO: style for highest contrast */
+	--bg-color: #ffff00;
+}
+
+:root[data-font-size="larger"] {
+	/* TODO: style for larger font size */
+	font-size: 24px;
+}
+
+:root[data-font-size="largest"] {
+	/* TODO: style for largest font size */
+	font-size: 32px;
 }
 
 body {
