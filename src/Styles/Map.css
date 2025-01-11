@@ -1,20 +1,32 @@
 .map-layer-icon {
-  margin: 0.25rem;
-  padding: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.25rem;
-  vertical-align: middle;
+	margin: 0.25rem;
+	padding: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 0.25rem;
+	vertical-align: middle;
 }
 
 .map-layer-name {
-  vertical-align: middle;
+	vertical-align: middle;
+}
+
+.map-transit-stop-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+	margin: 0.5rem 1rem;
+}
+
+.map-transit-stop-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+	text-align: center;
+}
+
+.map-transit-stop-popup .leaflet-popup-close-button {
+	display: none;
 }
 
 .leaflet-control-layers-selector:checked ~ * > .map-layer-name {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .leaflet-control-container .leaflet-top.leaflet-right {
-  font-size: 1.2rem;
+	font-size: 1.2rem;
 }

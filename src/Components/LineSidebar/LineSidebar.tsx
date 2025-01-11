@@ -25,7 +25,7 @@ export default function LineSidebar({
 	const { map, highlighted, shapes } = useContext(MapCtx)!;
 	useEffect(
 		() => () => {
-			highlighted.value = null;
+			highlighted.value = [];
 		},
 		[system, id, highlighted]
 	);
@@ -106,8 +106,8 @@ export default function LineSidebar({
 							<div
 								className={style.stop}
 								onClick={() => navigate(`/timetable/${system}/stop/${s.id}`)}
-								onMouseLeave={() => (highlighted.value = null)}
-								onMouseEnter={() => (highlighted.value = s.id)}
+								onMouseLeave={() => (highlighted.value = [])}
+								onMouseEnter={() => (highlighted.value = [s.id])}
 							>
 								<img
 									className={style.stopicon}

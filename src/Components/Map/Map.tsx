@@ -1,7 +1,7 @@
 import React, { Component, createContext, createRef, ReactNode } from "react";
 import { navigate } from "wouter/use-hash-location";
 import { effect, Signal, signal } from "@preact/signals-react";
-import { GeoJsonObject } from "geojson";
+import { GeoJsonObject, Geometry } from "geojson";
 import L from "leaflet";
 import Loading from "../Loading/Loading.tsx";
 import {
@@ -19,8 +19,9 @@ import "../../Styles/Map.css";
 
 export const MapCtx = createContext<{
 	map: L.Map;
-	highlighted: Signal<string | null>;
+	highlighted: Signal<string[]>;
 	shapes: Signal<[string, string | undefined][]>;
+	geojson: Signal<(GeoJsonObject & { color?: string })[]>;
 } | null>(null);
 
 export default class Map extends Component<
@@ -32,13 +33,16 @@ export default class Map extends Component<
 > {
 	private map: L.Map | undefined;
 	private map_container = createRef<HTMLElement>();
-	private highlighted = signal<string | null>(null);
+	private highlighted = signal<string[]>([]);
 	private shapes = signal<[string, string | undefined][]>([]);
+	private geojson = signal<(Geometry & { color?: string })[]>([]);
 	private shape_lines: L.GeoJSON = L.geoJSON(null, {
 		style: (feature: unknown) => {
 			const f = feature as object;
 			if ("color" in f) {
 				return { color: `#${f.color}` };
+			} else if ("geometry" in f && "color" in (f.geometry as object)) {
+				return { color: `#${(f.geometry as { color: unknown }).color}` };
 			} else {
 				return {};
 			}
@@ -83,6 +87,7 @@ export default class Map extends Component<
 								map: this.map!,
 								highlighted: this.highlighted,
 								shapes: this.shapes,
+								geojson: this.geojson,
 							}}
 						>
 							{this.props.children}
@@ -159,6 +164,12 @@ export default class Map extends Component<
 			this.shape_lines.clearLayers();
 			let current = true;
 
+			this.geojson.value.forEach((o) => {
+				if (current) {
+					this.shape_lines.addData(o);
+				}
+			});
+
 			this.shapes.value.forEach(([s, c]) => {
 				get_shape(this.props.system, s).then((res) => {
 					if (res !== undefined && current) {
@@ -186,6 +197,7 @@ export default class Map extends Component<
 
 				for (const stop of stops) {
 					this.stops[stop.id] = L.marker([stop.lat, stop.lon], {
+						alt: stop.name,
 						title: `${stop.name} (${[
 							...new Set(Object.values(stop.lines).map((l) => l!.name)),
 						]
@@ -210,12 +222,27 @@ export default class Map extends Component<
 						marker?.setIcon(
 							L.icon({
 								iconUrl: marker.getIcon().options.iconUrl!,
-								iconSize:
-									this.highlighted.value === id
-										? [2 * zoom * 48, 2 * zoom * 64]
-										: [zoom * 48, zoom * 64],
+								iconSize: this.highlighted.value.includes(id)
+									? [2 * zoom * 48, 2 * zoom * 64]
+									: [zoom * 48, zoom * 64],
 							})
 						);
+
+						marker?.closePopup();
+						if (
+							marker?.options?.alt &&
+							this.highlighted.value.includes(id) &&
+							this.highlighted.value.length > 1
+						) {
+							marker
+								?.bindPopup(marker.options.alt, {
+									autoClose: false,
+									interactive: false,
+									keepInView: false,
+									className: "map-transit-stop-popup",
+								})
+								?.openPopup();
+						}
 					}
 				};
 

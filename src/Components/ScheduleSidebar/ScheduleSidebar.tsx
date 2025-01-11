@@ -61,10 +61,10 @@ export default function ScheduleSidebar({
 	};
 
 	useEffect(() => {
-		highlighted.value = id;
+		highlighted.value = [id];
 
 		return () => {
-			highlighted.value = null;
+			highlighted.value = [];
 		};
 	}, [system, id]);
 

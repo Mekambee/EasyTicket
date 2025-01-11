@@ -19,7 +19,7 @@ export default function Stop({
 	const { highlighted } = useContext(MapCtx)!;
 	useEffect(
 		() => () => {
-			highlighted.value = null;
+			highlighted.value = [];
 		},
 		[highlighted]
 	);
@@ -27,8 +27,8 @@ export default function Stop({
 	return (
 		<div
 			className={style.stop}
-			onMouseLeave={() => (highlighted.value = null)}
-			onMouseEnter={() => (highlighted.value = id)}
+			onMouseLeave={() => (highlighted.value = [])}
+			onMouseEnter={() => (highlighted.value = [id])}
 		>
 			<p
 				className={style.name}

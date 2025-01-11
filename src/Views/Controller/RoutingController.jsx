@@ -4,7 +4,7 @@ import { useHashLocation } from "wouter/use-hash-location";
 import HomePageView from "../HomePage/HomePageView";
 import MyTicketsView from "../MyTickets/MyTicketsView";
 import BuyTicketView from "../BuyTicket/BuyTicketView";
-import SearchRouteView from "../SearchRoute/SearchRouteView";
+import SearchRouteView from "../SearchRoute/SearchRouteView.tsx";
 import TimetableView from "../Timetable/TimetableView.tsx";
 import OuterSiteView from "../OuterSite/OuterSiteView";
 import YourTicketView from "../YourTicketView/YourTicketView";
@@ -23,7 +23,7 @@ const AppRoutes = () => {
 				<Route path="/my-tickets">
 					<MyTicketsView />
 				</Route>
-				<Route path="/search-route/:system" nest>
+				<Route path="/search-route/:system">
 					{({ system }) => <SearchRouteView system={system} />}
 				</Route>
 				<Route path="/timetable/:system" nest>
