@@ -1,0 +1,62 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	margin: calc(1rem - 1px);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--fg-color);
+	border-radius: 1rem;
+}
+
+.wrapper.selected {
+	border: 0.2rem solid var(--fg-color);
+	margin: calc(1rem - 0.2rem);
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+}
+
+.legs {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+
+.leg {
+	display: grid;
+	grid-template-columns: 1.5rem auto;
+	grid-template-rows: 1.5rem 1.5rem;
+	grid-template-areas: "icon lines" ". stops";
+	gap: 0.1rem;
+}
+
+.legicon {
+	grid-area: icon;
+	width: 1.5rem;
+	height: 1.5rem;
+	padding: 0;
+	margin: 0;
+}
+
+.lines {
+	grid-area: lines;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	text-wrap: nowrap;
+	overflow-x: scroll;
+	scrollbar-width: none;
+	line-height: 1.5rem;
+}
+
+.stops {
+	grid-area: stops;
+	text-overflow: ellipsis;
+	text-wrap: nowrap;
+	overflow-x: scroll;
+	scrollbar-width: none;
+}
