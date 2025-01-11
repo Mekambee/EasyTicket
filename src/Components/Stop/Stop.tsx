@@ -32,7 +32,7 @@ export default function Stop({
 		>
 			<p
 				className={style.name}
-				onClick={() => navigate(`/${system}/stop/${id}`)}
+				onClick={() => navigate(`/timetable/${system}/stop/${id}`)}
 			>
 				{name}
 			</p>
@@ -46,7 +46,7 @@ export default function Stop({
 							key={l.id}
 							className={style.line}
 							title={`${l.name} ${l.headsign}`}
-							onClick={() => navigate(`/${system}/line/${l.id}`)}
+							onClick={() => navigate(`/timetable/${system}/line/${l.id}`)}
 						>
 							<img
 								className={style.linetype}

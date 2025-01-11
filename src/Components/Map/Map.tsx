@@ -199,7 +199,7 @@ export default class Map extends Component<
 					})
 						.addTo(map)
 						.on("click", () =>
-							navigate(`/${this.props.system}/stop/${stop.id}`)
+							navigate(`/timetable/${this.props.system}/stop/${stop.id}`)
 						);
 				}
 
@@ -244,7 +244,7 @@ export default class Map extends Component<
 						})
 							.addTo(map)
 							.on("click", () =>
-								navigate(`/${this.props.system}/line/${vehicle.line}`)
+								navigate(`/timetable/${this.props.system}/line/${vehicle.line}`)
 							)
 					);
 				}
@@ -293,7 +293,9 @@ export default class Map extends Component<
 									})
 										.addTo(map)
 										.on("click", () =>
-											navigate(`/${this.props.system}/line/${vehicle.line}`)
+											navigate(
+												`/timetable/${this.props.system}/line/${vehicle.line}`
+											)
 										)
 								);
 							}

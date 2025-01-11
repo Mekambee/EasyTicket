@@ -48,12 +48,12 @@ export default function HomePage() {
 						</Link>
 					</div>
 					<div className={styles.navlink}>
-						<Link to="/search-route">
+						<Link to="/search-route/Kraków">
 							<HomeButtonComponent buttonText={searchRouteText} />
 						</Link>
 					</div>
 					<div className={styles.navlink}>
-						<Link to="/timetable">
+						<Link to="/timetable/Kraków">
 							<HomeButtonComponent buttonText={timetableText} />
 						</Link>
 					</div>
@@ -84,7 +84,9 @@ export default function HomePage() {
 					<div className={styles.popupContent}>
 						<h2 className={styles.popupTitle}>Zgłoś problem podczas jazdy</h2>
 						{isSubmitted ? (
-							<p className={styles.successMessage}>Pomyślnie przesłano zgłoszenie!</p>
+							<p className={styles.successMessage}>
+								Pomyślnie przesłano zgłoszenie!
+							</p>
 						) : (
 							<>
 								<p className={styles.popupText}>Dokładnie opisz problem</p>
@@ -94,7 +96,10 @@ export default function HomePage() {
 									onChange={(e) => setProblemDescription(e.target.value)}
 								></textarea>
 								<div className={styles.popupActions}>
-									<button className={styles.cancelButton} onClick={handlePopupClose}>
+									<button
+										className={styles.cancelButton}
+										onClick={handlePopupClose}
+									>
 										Wróć
 									</button>
 									<button

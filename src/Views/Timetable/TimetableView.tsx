@@ -1,18 +1,17 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { Switch, Route } from "wouter";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent.jsx";
 import Map from "../../Components/Map/Map.tsx";
 import Loading from "../../Components/Loading/Loading.tsx";
+import ScheduleSidebar from "../../Components/ScheduleSidebar/ScheduleSidebar.tsx";
+import LineSidebar from "../../Components/LineSidebar/LineSidebar.tsx";
 import Stop from "../../Components/Stop/Stop.tsx";
 import StopGroup from "../../Components/StopGroup/StopGroup.tsx";
 import { cmp } from "../../util.ts";
 import style from "./TimetableView.module.css";
 import { get_stops } from "../../api.ts";
 
-const TRANSIT_SYSTEM = "Kraków";
-
-export default function TimetableView() {
-	//TODO: should this be a prop or otherwise configurable?
-	const system = TRANSIT_SYSTEM;
+export default function TimetableView({ system }: { system: string }) {
 	const [search, setSearch] = useState<string>("");
 	const [content, setContent] = useState<
 		ReactNode | ((search: string) => ReactNode)
@@ -25,22 +24,34 @@ export default function TimetableView() {
 	}, [system]);
 
 	return (
-		<Map system={TRANSIT_SYSTEM}>
-			<TopBarComponent noStyleButtons />
-			<div className={style.wrapper}>
-				{typeof content === "function" ? (
-					<input
-						type="text"
-						className={style.search}
-						placeholder="Search"
-						onInput={(ev) => setSearch(ev.currentTarget.value.toLowerCase())}
-					/>
-				) : null}
+		<Map system={system}>
+			<Switch>
+				<Route path="/stop/:id">
+					{({ id }) => <ScheduleSidebar system={system} id={id} />}
+				</Route>
+				<Route path="/line/:id">
+					{({ id }) => <LineSidebar system={system} id={id} />}
+				</Route>
+				<Route path="/">
+					<TopBarComponent noStyleButtons />
+					<div className={style.wrapper}>
+						{typeof content === "function" ? (
+							<input
+								type="text"
+								className={style.search}
+								placeholder="Search"
+								onInput={(ev) =>
+									setSearch(ev.currentTarget.value.toLowerCase())
+								}
+							/>
+						) : null}
 
-				<div className={style.content}>
-					{typeof content === "function" ? content(search) : content}
-				</div>
-			</div>
+						<div className={style.content}>
+							{typeof content === "function" ? content(search) : content}
+						</div>
+					</div>
+				</Route>
+			</Switch>
 		</Map>
 	);
 }

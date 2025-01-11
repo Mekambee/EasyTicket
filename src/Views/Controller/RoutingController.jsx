@@ -23,11 +23,11 @@ const AppRoutes = () => {
 				<Route path="/my-tickets">
 					<MyTicketsView />
 				</Route>
-				<Route path="/search-route">
-					<SearchRouteView />
+				<Route path="/search-route/:system" nest>
+					{({ system }) => <SearchRouteView system={system} />}
 				</Route>
-				<Route path="/timetable">
-					<TimetableView />
+				<Route path="/timetable/:system" nest>
+					{({ system }) => <TimetableView system={system} />}
 				</Route>
 				<Route path="/outer-site">
 					<OuterSiteView />
