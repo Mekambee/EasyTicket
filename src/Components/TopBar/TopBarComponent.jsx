@@ -20,7 +20,10 @@ export default function TopBarComponent({ noStyleButtons }) {
 				className={styles.backHomeButton}
 				onClick={(e) => {
 					e.preventDefault();
-					navigate("/");
+					const home = new URL(window.location.href);
+					home.search = "";
+					home.hash = "";
+					window.location.href = home.toString();
 				}}
 			>
 				<svg
