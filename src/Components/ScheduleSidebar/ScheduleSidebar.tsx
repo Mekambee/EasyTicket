@@ -112,9 +112,9 @@ export default function ScheduleSidebar({
 		return (
 			<>
 				<div className={style.header}>
-					<Link to="/" className={style.back}>
+					<button onClick={() => window.history.back()} className={style.back}>
 						<img className={style.backicon} src={back_icon} alt="wróć" />
-					</Link>
+					</button>
 					<h1 className={style.title}>Błąd</h1>
 					<button className={style.refresh} onClick={() => refresh()}>
 						<img
@@ -131,9 +131,9 @@ export default function ScheduleSidebar({
 	return (
 		<div className={style.wrapper}>
 			<div className={style.header}>
-				<Link to="/" className={style.back}>
+				<button onClick={() => window.history.back()} className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</Link>
+				</button>
 				<h1 className={style.name}>
 					{schedule === null ? "" : schedule?.name}
 				</h1>

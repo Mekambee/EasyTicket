@@ -52,9 +52,9 @@ export default function LineSidebar({
 	if (schedule === "error") {
 		return (
 			<div className={style.header}>
-				<Link to="/" className={style.back}>
+				<button onClick={() => window.history.back()} className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</Link>
+				</button>
 				<h1 className={style.title}>Błąd</h1>
 				<button className={style.refresh} onClick={() => refresh()}>
 					<img className={style.refreshicon} src={refresh_icon} alt="odśwież" />
@@ -66,9 +66,9 @@ export default function LineSidebar({
 	return (
 		<div className={style.wrapper}>
 			<div className={style.header}>
-				<Link to="/" className={style.back}>
+				<button onClick={() => window.history.back()} className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</Link>
+				</button>
 				<div className={style.title}>
 					<h1 className={style.name}>
 						{schedule === null ? "" : schedule?.name}
