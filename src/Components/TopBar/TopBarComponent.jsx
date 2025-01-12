@@ -45,7 +45,7 @@ export default function TopBarComponent({ noStyleButtons }) {
 							className={styles.button}
 							onClick={() => {
 								localStorage.setItem("font-size", "default");
-								document.documentElement.dataset.contrast = "default";
+								document.documentElement.dataset.fontSize = "default";
 							}}
 						>
 							<img
@@ -58,7 +58,7 @@ export default function TopBarComponent({ noStyleButtons }) {
 							className={styles.button}
 							onClick={() => {
 								localStorage.setItem("font-size", "larger");
-								document.documentElement.dataset.contrast = "larger";
+								document.documentElement.dataset.fontSize = "larger";
 							}}
 						>
 							<img
@@ -71,7 +71,7 @@ export default function TopBarComponent({ noStyleButtons }) {
 							className={styles.button}
 							onClick={() => {
 								localStorage.setItem("font-size", "largest");
-								document.documentElement.dataset.contrast = "largest";
+								document.documentElement.dataset.fontSize = "largest";
 							}}
 						>
 							<img
