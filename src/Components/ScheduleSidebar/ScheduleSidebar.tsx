@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
 import { Temporal } from "temporal-polyfill";
-import { Link } from "wouter";
 
 import back_icon from "../../assets/back.svg";
 import refresh_icon from "../../assets/refresh.svg";

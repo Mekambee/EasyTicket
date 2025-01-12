@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "wouter";
-import { navigate } from "wouter/use-hash-location";
 
 import contrast_1_icon from "../../assets/contrast-1.svg";
 import contrast_2_icon from "../../assets/contrast-2.svg";

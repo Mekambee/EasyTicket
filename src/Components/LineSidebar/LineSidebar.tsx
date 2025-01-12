@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
-import { Link } from "wouter";
 
 import back_icon from "../../assets/back.svg";
 import locate_icon from "../../assets/locate.svg";
