@@ -12,6 +12,7 @@ import { MapCtx } from "../Map/Map.tsx";
 import { get_stop, StopSchedule } from "../../api.ts";
 import { cmp } from "../../util.ts";
 import style from "./ScheduleSidebar.module.css";
+import TopBarComponent from "../TopBar/TopBarComponent.jsx";
 
 export default function ScheduleSidebar({
 	system,
@@ -110,6 +111,7 @@ export default function ScheduleSidebar({
 	if (schedule === "error") {
 		return (
 			<>
+				<TopBarComponent noStyleButtons />
 				<div className={style.header}>
 					<button onClick={() => window.history.back()} className={style.back}>
 						<img className={style.backicon} src={back_icon} alt="wróć" />
@@ -129,6 +131,7 @@ export default function ScheduleSidebar({
 
 	return (
 		<div className={style.wrapper}>
+			<TopBarComponent noStyleButtons />
 			<div className={style.header}>
 				<button onClick={() => window.history.back()} className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />

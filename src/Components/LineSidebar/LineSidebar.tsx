@@ -6,6 +6,7 @@ import locate_icon from "../../assets/locate.svg";
 import refresh_icon from "../../assets/refresh.svg";
 
 import Loading from "../Loading/Loading.tsx";
+import TopBarComponent from "../TopBar/TopBarComponent";
 import { get_line } from "../../api.ts";
 import type { Line } from "../../api.ts";
 import { get_stop_icon, get_type_name } from "../../util.ts";
@@ -50,20 +51,28 @@ export default function LineSidebar({
 
 	if (schedule === "error") {
 		return (
-			<div className={style.header}>
-				<button onClick={() => window.history.back()} className={style.back}>
-					<img className={style.backicon} src={back_icon} alt="wróć" />
-				</button>
-				<h1 className={style.title}>Błąd</h1>
-				<button className={style.refresh} onClick={() => refresh()}>
-					<img className={style.refreshicon} src={refresh_icon} alt="odśwież" />
-				</button>
-			</div>
+			<>
+				<TopBarComponent noStyleButtons />
+				<div className={style.header}>
+					<button onClick={() => window.history.back()} className={style.back}>
+						<img className={style.backicon} src={back_icon} alt="wróć" />
+					</button>
+					<h1 className={style.title}>Błąd</h1>
+					<button className={style.refresh} onClick={() => refresh()}>
+						<img
+							className={style.refreshicon}
+							src={refresh_icon}
+							alt="odśwież"
+						/>
+					</button>
+				</div>
+			</>
 		);
 	}
 
 	return (
 		<div className={style.wrapper}>
+			<TopBarComponent noStyleButtons />
 			<div className={style.header}>
 				<button onClick={() => window.history.back()} className={style.back}>
 					<img className={style.backicon} src={back_icon} alt="wróć" />
