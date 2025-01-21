@@ -1,8 +1,8 @@
 .ticketCard {
 	background-color: var(--bg-color);
 	border-radius: 20px;
-	border: 1px solid var(--bg-grey);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--fg-grey);
+	box-shadow: 0 4px 8px var(--shadow-color);
 	text-align: center;
 	width: 200px;
 	margin: 20px;
@@ -28,7 +28,7 @@
 }
 .buyButton {
 	background-color: var(--main-color);
-	color: var(--bg-color);
+	color: var(--on-main);
 	border: none;
 	border-radius: 0 0 15px 15px;
 	padding: 15px;
@@ -78,7 +78,7 @@
 .popupContent button {
 	background-color: var(--payment-color);
 	border-radius: 5px;
-	color: var(--bg-color);
+	color: var(--on-payment);
 	border: none;
 	padding: 20px;
 	margin: 5px;

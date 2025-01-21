@@ -28,7 +28,7 @@
 }
 .activateButton {
 	background-color: var(--external-color);
-	color: var(--bg-color);
+	color: var(--on-external);
 	border: none;
 	border-radius: 0 0 15px 15px;
 	padding: 15px;

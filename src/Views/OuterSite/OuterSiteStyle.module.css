@@ -7,7 +7,7 @@
 }
 .topBar {
 	background-color: var(--external-color);
-	color: var(--bg-color);
+	color: var(--on-external);
 	padding: 20px 0;
 	font-size: 24px;
 	font-family: "Times New Roman", serif;
@@ -35,7 +35,7 @@
 
 .confirmButton {
 	background-color: var(--external-color);
-	color: var(--bg-color);
+	color: var(--on-external);
 	border: none;
 	border-radius: 10px;
 	padding: 10px 20px;

@@ -28,7 +28,7 @@
 }
 .activateButton {
 	background-color: var(--main-color);
-	color: var(--bg-color);
+	color: var(--on-main);
 	border: none;
 	border-radius: 0 0 15px 15px;
 	padding: 15px;
@@ -59,9 +59,9 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
-  }
-  
-  .popupContent {
+}
+
+.popupContent {
 	background-color: white;
 	padding: 20px;
 	border-radius: 8px;
@@ -71,27 +71,27 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-  }
-  
-  .popupTitle {
+}
+
+.popupTitle {
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 10px;
-  }
-  
-  .popupText {
+}
+
+.popupText {
 	font-size: 16px;
 	margin-bottom: 20px;
-  }
-  
-  .popupGrid {
+}
+
+.popupGrid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 10px;
 	width: 100%;
-  }
-  
-  .popupGrid button {
+}
+
+.popupGrid button {
 	background-color: #28a745;
 	color: white;
 	border: none;
@@ -100,13 +100,13 @@
 	font-size: 16px;
 	cursor: pointer;
 	transition: background-color 0.3s;
-  }
-  
-  .popupGrid button:hover {
+}
+
+.popupGrid button:hover {
 	background-color: #218838;
-  }
-  
-  .vehicleInput {
+}
+
+.vehicleInput {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 10px;
@@ -114,5 +114,4 @@
 	text-align: center;
 	margin-bottom: 20px;
 	width: 80%;
-  }
-  
+}

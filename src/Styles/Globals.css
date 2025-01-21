@@ -12,12 +12,14 @@
 	--bg-grey: #f6f8fa;
 	--bg-grey-variant: #b3c5d5;
 	--bg-color: #ffffff;
-	--bg-main: #1030a0;
+	--on-main: #ffffff;
 	--main-color: #1030a0;
 	--main-color-variant: #0b2274;
+	--on-external: #ffffff;
 	--external-color: #0fa051;
 	--external-color-variant: #0a7038;
 	--link-color: #0969da;
+	--on-payment: #ffffff;
 	--payment-color: #e33a23;
 	--payment-color-variant: #b92b18;
 	--shadow-color: #00000033;
@@ -32,13 +34,43 @@
 }
 
 :root[data-contrast="higher"] {
-	/* TODO: style for higher contrast */
+	--fg-color: #ffffff;
+	--fg-grey: #cccccc;
+	--fg-grey-variant: #bbbbbb;
+	--bg-grey: #333333;
+	--bg-grey-variant: #222222;
 	--bg-color: #000000;
+	--on-main: #ffffff;
+	--main-color: #1030a0;
+	--main-color-variant: #0b2274;
+	--on-external: #ffffff;
+	--external-color: #0fa051;
+	--external-color-variant: #0a7038;
+	--link-color: #0969da;
+	--on-payment: #ffffff;
+	--payment-color: #e33a23;
+	--payment-color-variant: #b92b18;
+	--shadow-color: #ffffff33;
 }
 
 :root[data-contrast="highest"] {
-	/* TODO: style for highest contrast */
-	--bg-color: #ffff00;
+	--fg-color: #ffff00;
+	--fg-grey: #ffff00;
+	--fg-grey-variant: #ffff00;
+	--bg-grey: #000000;
+	--bg-grey-variant: #000000;
+	--bg-color: #000000;
+	--on-main: #000000;
+	--main-color: #ffff00;
+	--main-color-variant: #ffff00;
+	--on-external: #ffffff;
+	--external-color: #0fa051;
+	--external-color-variant: #0a7038;
+	--link-color: #ffffff;
+	--on-payment: #000000;
+	--payment-color: #ffff00;
+	--payment-color-variant: #ffff00;
+	--shadow-color: #ffffff00;
 }
 
 :root[data-font-size="larger"] {
