@@ -22,7 +22,7 @@
 	align-items: center;
 	border-radius: 8px;
 	margin-bottom: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .ticketInfo {
@@ -74,7 +74,7 @@
 	cursor: pointer;
 	text-align: center;
 	margin: 5px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .yourTicketButton:hover {
@@ -141,7 +141,7 @@
 	border-radius: 8px;
 	text-align: center;
 	width: 400px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 10px var(--shadow-color);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
