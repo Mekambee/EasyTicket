@@ -70,12 +70,18 @@ async function stops(system: string): Promise<(search: string) => ReactNode> {
 		}
 	}
 
-	return (search: string) => (
-		<>
-			{[...groups.entries()]
-				.filter(([k, _]) => k.toLowerCase().includes(search))
-				.sort(([a, _a], [b, _b]) => cmp([a], [b]))
-				.map(([name, stops]) => (
+	return (search: string) => {
+		const results = [...groups.entries()]
+			.filter(([k, _]) => k.toLowerCase().includes(search))
+			.sort(([a, _a], [b, _b]) => cmp([a], [b]));
+
+		if (results.length === 0) {
+			return <p className={style.noresults}>Nie znaleziono przystanków.</p>;
+		}
+
+		return (
+			<>
+				{results.map(([name, stops]) => (
 					<StopGroup
 						key={name}
 						name={name}
@@ -99,6 +105,7 @@ async function stops(system: string): Promise<(search: string) => ReactNode> {
 							))}
 					</StopGroup>
 				))}
-		</>
-	);
+			</>
+		);
+	};
 }
