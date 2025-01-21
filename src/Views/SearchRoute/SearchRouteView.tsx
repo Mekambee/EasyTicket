@@ -101,6 +101,7 @@ const Sidebar = ({ system }) => {
 					] as [RouteSearchMode, string][]
 				).map(([m, text]) => (
 					<span
+						key={m}
 						className={`${style.mode} ${mode === m ? style.selectedmode : ""}`}
 						onClick={() => setMode(m)}
 					>
