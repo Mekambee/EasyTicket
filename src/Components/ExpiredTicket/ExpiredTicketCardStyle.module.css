@@ -12,20 +12,20 @@
 	justify-content: space-between;
 }
 .ticketCard h2 {
-	font-size: 28px;
+	font-size: 1.75rem;
 	margin: 10px 0;
 }
 .redParagraph p {
 	color: red;
 }
 .ticketCard p {
-	font-size: 16px;
+	font-size: 1rem;
 	color: var(--fg-grey);
 	margin: 5px 0;
 }
 
 .ticketCard h3 {
-	font-size: 24px;
+	font-size: 1.5rem;
 	margin: 15px 0;
 }
 .activateButton {
@@ -34,7 +34,7 @@
 	border: none;
 	border-radius: 0 0 15px 15px;
 	padding: 15px;
-	font-size: 16px;
+	font-size: 1rem;
 	cursor: pointer;
 	transition: background-color 0.3s;
 	width: 100%;

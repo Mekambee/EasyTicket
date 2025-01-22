@@ -13,6 +13,8 @@
 }
 .backHomeIcon {
 	margin-left: 10px;
+	height: 2rem;
+	width: 2rem;
 	color: var(--on-main);
 }
 .logo {
@@ -23,7 +25,7 @@
 }
 .logo h1 {
 	margin: 0;
-	font-size: 20px;
+	font-size: 1.2rem;
 }
 .topBarButtons {
 	margin-right: 10px;

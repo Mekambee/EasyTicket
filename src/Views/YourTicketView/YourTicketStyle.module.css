@@ -26,7 +26,7 @@
 }
 
 .ticketInfo {
-	font-size: 16px;
+	font-size: 1rem;
 	color: #333;
 	line-height: 1.5;
 	text-align: center;
@@ -44,14 +44,14 @@
 }
 
 .rightSection h2 {
-	font-size: 28px;
+	font-size: 1.75rem;
 	font-weight: bold;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
 .rightSection h3 {
-	font-size: 20px;
+	font-size: 1.2rem;
 	color: #000;
 	margin-top: 10px;
 }
@@ -70,7 +70,7 @@
 	border: none;
 	padding: 15px;
 	border-radius: 5px;
-	font-size: 20px;
+	font-size: 1.2rem;
 	cursor: pointer;
 	text-align: center;
 	margin: 5px;
@@ -82,43 +82,41 @@
 }
 
 .paragraph {
-	font-size: 25px;
+	font-size: 1.5rem;
 	margin-bottom: 20px;
 	line-height: 1.6;
 }
-.bolded{
+.bolded {
 	font-weight: bold;
 }
-.enlarge{
-	font-size: 32px;
+.enlarge {
+	font-size: 2rem;
 }
 .redParagraph {
 	text-align: center;
-	font-size: 32px;
+	font-size: 2rem;
 	margin-bottom: 20px;
 	line-height: 1.6;
 	color: red;
 }
 .greenParagraph {
-	font-size: 32px;
+	font-size: 2rem;
 	margin-bottom: 20px;
 	line-height: 1.6;
 	color: green;
 }
 .redParagraphSmaller {
-	font-size: 25px;
+	font-size: 1.5rem;
 	margin-bottom: 20px;
 	line-height: 1.6;
 	color: red;
 }
 .greenParagraphSmaller {
-	font-size: 25px;
+	font-size: 1.5rem;
 	margin-bottom: 20px;
 	line-height: 1.6;
 	color: green;
 }
-
-
 
 /* popup style */
 
@@ -148,13 +146,13 @@
 }
 
 .popupTitle {
-	font-size: 20px;
+	font-size: 1.2rem;
 	font-weight: bold;
 	margin-bottom: 10px;
 }
 
 .popupText {
-	font-size: 16px;
+	font-size: 1rem;
 	margin-bottom: 20px;
 }
 
@@ -171,7 +169,7 @@
 	border: none;
 	border-radius: 5px;
 	padding: 10px;
-	font-size: 16px;
+	font-size: 1rem;
 	cursor: pointer;
 	transition: background-color 0.3s;
 }

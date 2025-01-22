@@ -38,11 +38,16 @@
 	background-color: var(--bg-color);
 	cursor: pointer;
 }
+.questionMarkIcon {
+	width: 2rem;
+	height: 2rem;
+}
+
 .toggleButton {
 	width: 150px;
 	flex: 1;
 	padding: 10px;
-	font-size: 16px;
+	font-size: 1rem;
 	background-color: var(--bg-color);
 	color: var(--fg-color);
 	border: 1px solid var(--fg-color);
