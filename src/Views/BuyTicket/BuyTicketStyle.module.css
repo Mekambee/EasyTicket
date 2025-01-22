@@ -63,6 +63,15 @@
 	color: var(--on-main);
 	border-color: var(--main-color);
 }
+
+.toggleButton:hover {
+	background-color: var(--bg-grey);
+}
+
+.toggleButton.active:hover {
+	background-color: var(--main-color-variant);
+}
+
 @media (max-width: 1000px) {
 	.ticketGrid {
 		grid-template-columns: repeat(2, 1fr);
