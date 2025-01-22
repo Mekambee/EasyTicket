@@ -74,12 +74,10 @@
 }
 
 :root[data-font-size="larger"] {
-	/* TODO: style for larger font size */
 	font-size: 24px;
 }
 
 :root[data-font-size="largest"] {
-	/* TODO: style for largest font size */
 	font-size: 32px;
 }
 

@@ -69,3 +69,35 @@
 		display: none;
 	}
 }
+
+@media (max-width: 1500px) {
+	:root[data-font-size="larger"] .logo {
+		display: none;
+	}
+}
+
+@media (max-width: 750px) {
+	:root[data-font-size="larger"] .logo {
+		display: initial;
+	}
+
+	:root[data-font-size="larger"] .button {
+		display: none;
+	}
+}
+
+@media (max-width: 2000px) {
+	:root[data-font-size="largest"] .logo {
+		display: none;
+	}
+}
+
+@media (max-width: 1000px) {
+	:root[data-font-size="largest"] .logo {
+		display: initial;
+	}
+
+	:root[data-font-size="largest"] .button {
+		display: none;
+	}
+}
