@@ -13,11 +13,13 @@ export default function HomePage() {
 	const [isPopupVisible, setIsPopupVisible] = useState(false);
 	const [problemDescription, setProblemDescription] = useState("");
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [triedSubmittingEmpty, setTriedSubmittingEmpty] = useState(false);
 
 	const handleReportProblemClick = () => {
 		setIsPopupVisible(true);
 		setIsSubmitted(false);
 		setProblemDescription("");
+		setTriedSubmittingEmpty(false);
 	};
 
 	const handlePopupClose = () => {
@@ -25,6 +27,11 @@ export default function HomePage() {
 	};
 
 	const handleProblemSubmit = () => {
+		if (problemDescription === "") {
+			setTriedSubmittingEmpty(true);
+			return;
+		}
+
 		setIsSubmitted(true);
 		setTimeout(() => {
 			setIsPopupVisible(false);
@@ -95,6 +102,9 @@ export default function HomePage() {
 									value={problemDescription}
 									onChange={(e) => setProblemDescription(e.target.value)}
 								></textarea>
+								{triedSubmittingEmpty ? (
+									<p className={styles.textError}>Proszę opisać problem.</p>
+								) : null}
 								<div className={styles.popupActions}>
 									<button
 										className={styles.cancelButton}
