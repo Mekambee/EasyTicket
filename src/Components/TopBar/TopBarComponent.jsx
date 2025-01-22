@@ -36,9 +36,19 @@ export default function TopBarComponent({ noStyleButtons }) {
 				</svg>
 			</Link>
 
-			<div className={styles.logo}>
+			<Link
+				to="/"
+				className={styles.logo}
+				onClick={(e) => {
+					e.preventDefault();
+					const home = new URL(window.location.href);
+					home.search = "";
+					home.hash = "";
+					window.location.href = home.toString();
+				}}
+			>
 				<h1>EasyTicket</h1>
-			</div>
+			</Link>
 
 			{!noStyleButtons ? (
 				<div className={styles.topBarButtons}>

@@ -18,6 +18,9 @@
 	color: var(--on-main);
 }
 .logo {
+	display: block;
+	color: var(--on-main);
+	text-decoration: none;
 	position: absolute;
 	left: 50%;
 	top: 50%;
