@@ -24,7 +24,7 @@ export default function TicketCardComponent({ price, time, type }) {
 	return (
 		<div className={styles.ticketCard}>
 			<h2>{time}</h2>
-			<h4>{type}</h4>
+			<h4>{type === "Normalny" ? t("normal-ticket") : t("reduced-ticket")}</h4>
 			<p>MPK Kraków</p>
 			<p>{t("zones")} I+II+III</p>
 			<h3>{price} zł</h3>
