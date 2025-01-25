@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ActiveTicketCardStyle.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ActiveTicketCardComponent({ price, time, type, onActivate, id }) {
   const [isVehiclePopupVisible, setVehiclePopupVisible] = useState(false);
@@ -13,23 +14,25 @@ export default function ActiveTicketCardComponent({ price, time, type, onActivat
     onActivate();
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.ticketCard}>
       <h2>{time}</h2>
-      <h4>{type}</h4>
+      <h4>{type === "Normalny" ? t("normal-ticket") : t("reduced-ticket")}</h4>
       <p>MPK Kraków</p>
-      <p>strefy I+II+III</p>
+      <p>{t("zones")} I+II+III</p>
       <h3>{price} zł</h3>
       <button className={styles.activateButton} onClick={handleActivateClick}>
-        Aktywuj Bilet
+        {t("activate-ticket")}
       </button>
 
       {isVehiclePopupVisible && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
-            <h2 className={styles.popupTitle}>Aktywacja biletu</h2>
+            <h2 className={styles.popupTitle}>{t("ticket-activation")}</h2>
             <p className={styles.popupText}>
-              Wpisz identyfikator pojazdu znajdujący się nad kasownikami i przy drzwiach.
+              {t("enter-vehicle-number")}
             </p>
             <input
               className={styles.vehicleInput}
@@ -38,8 +41,8 @@ export default function ActiveTicketCardComponent({ price, time, type, onActivat
               readOnly
             />
             <div className={styles.popupGrid}>
-              <button onClick={() => setVehiclePopupVisible(false)}>Anuluj</button>
-              <button onClick={handleVehicleSubmit}>Aktywuj</button>
+              <button onClick={() => setVehiclePopupVisible(false)}>{t("cancel")}</button>
+              <button onClick={handleVehicleSubmit}>{t("activate")}</button>
             </div>
           </div>
         </div>

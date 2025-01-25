@@ -5,18 +5,18 @@ import HomeButtonComponent from "../../Components/HomeButton/HomeButtonComponent
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import { useTranslation } from "react-i18next";
 
-const buyTicketText = "Kup bilet";
-const myTicketsText = "Moje bilety";
-const searchRouteText = "Wyszukaj trasę";
-const timetableText = "Rozkład jazdy";
-
 export default function HomePage() {
+	const { t } = useTranslation();
+	const buyTicketText = t("buy-ticket");
+	const myTicketsText = t("my-tickets");
+	const searchRouteText = t("search-route");
+	const timetableText = t("timetable");
+
 	const [isPopupVisible, setIsPopupVisible] = useState(false);
 	const [problemDescription, setProblemDescription] = useState("");
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [triedSubmittingEmpty, setTriedSubmittingEmpty] = useState(false);
 
-	const { t } = useTranslation();
 
 	const handleReportProblemClick = () => {
 		setIsPopupVisible(true);
@@ -45,7 +45,6 @@ export default function HomePage() {
 		<div className={styles.homeBody}>
 			<TopBarComponent />
 			<div className={styles.content}>
-				{/* <h1>Witaj w Easy Ticket!</h1> */}
 				<h1>{t("welcome")}</h1>
 				<div className={styles.buttonBox}>
 					<div className={styles.navlink}>
@@ -86,41 +85,41 @@ export default function HomePage() {
 							/>
 						</svg>
 					</button>
-					<p>Zgłoś Problem</p>
+					<p>{t("report-problem")}</p>
 				</div>
 			</div>
 
 			{isPopupVisible && (
 				<div className={styles.popup}>
 					<div className={styles.popupContent}>
-						<h2 className={styles.popupTitle}>Zgłoś problem podczas jazdy</h2>
+						<h2 className={styles.popupTitle}>{t("report-problem-while-driving")}</h2>
 						{isSubmitted ? (
 							<p className={styles.successMessage}>
-								Pomyślnie przesłano zgłoszenie!
+								{t("send-report")}
 							</p>
 						) : (
 							<>
-								<p className={styles.popupText}>Dokładnie opisz problem</p>
+								<p className={styles.popupText}>{t("describe-problem")}</p>
 								<textarea
 									className={styles.textArea}
 									value={problemDescription}
 									onChange={(e) => setProblemDescription(e.target.value)}
 								></textarea>
 								{triedSubmittingEmpty ? (
-									<p className={styles.textError}>Proszę opisać problem.</p>
+									<p className={styles.textError}>{t("describe-problem")}</p>
 								) : null}
 								<div className={styles.popupActions}>
 									<button
 										className={styles.cancelButton}
 										onClick={handlePopupClose}
 									>
-										Wróć
+										{t("go-back")}
 									</button>
 									<button
 										className={styles.submitButton}
 										onClick={handleProblemSubmit}
 									>
-										Zgłoś
+										{t("report")}
 									</button>
 								</div>
 							</>

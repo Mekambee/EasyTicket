@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./OuterSiteStyle.module.css";
 import { useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 
 const getQueryParams = (queryString) => {
   const params = new URLSearchParams(queryString);
@@ -12,6 +13,7 @@ const getQueryParams = (queryString) => {
 };
 
 export default function OuterSiteView() {
+  const {t} = useTranslation();
   const [, navigate] = useLocation();
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isVehiclePopupVisible, setVehiclePopupVisible] = useState(false);
@@ -35,7 +37,6 @@ export default function OuterSiteView() {
   };
   const handleVehicleSubmit = () => {
     const newTicket = {
-      // id: Date.now(),
       id: ticketID,
       price,
       time,
@@ -53,28 +54,28 @@ export default function OuterSiteView() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topBar}>Twój Bank</div>
+      <div className={styles.topBar}>{t("your-bank")}</div>
       <div className={styles.content}>
         <p className={styles.infoText}>
-          Ta strona nie jest częścią testu, ponieważ jest <br />
-          zewnętrzną stroną niestanowiącą części systemu <br />
+          {t("this-site-is-not")} <br />
+          {t("the-part-of-the-system")} <br />
           <span className={styles.bold}>EasyTicket</span>.
         </p>
         <button className={styles.confirmButton} onClick={handleConfirmClick}>
-          Potwierdź Płatność
+          {t("confirm-payment")}
         </button>
       </div>
 
       {isPopupVisible && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
-            <h2 className={styles.popupTitle}>Transakcja przebiegła pomyślnie</h2>
+            <h2 className={styles.popupTitle}>{t("transaction-successful")}</h2>
             <p className={styles.popupText}>
-              Wybierz, co chcesz zrobić z zakupionym biletem
+              {t("choose-action")}
             </p>
             <div className={styles.popupGrid}>
-              <button onClick={handleActivateNow}>Aktywuj teraz</button>
-              <button onClick={handlePostpone}>Odłóż na później</button>
+              <button onClick={handleActivateNow}>{t("activate-now")}</button>
+              <button onClick={handlePostpone}>{t("postpone-ticket")}</button>
             </div>
           </div>
         </div>
@@ -83,9 +84,9 @@ export default function OuterSiteView() {
       {isVehiclePopupVisible && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
-            <h2 className={styles.popupTitle}>Aktywacja biletu</h2>
+            <h2 className={styles.popupTitle}>{t("ticket-activation")}</h2>
             <p className={styles.popupText}>
-              Wpisz identyfikator pojazdu znajdujący się nad kasownikami i przy drzwiach.
+              {t("enter-vehicle-number")}
             </p>
             <input
               className={styles.vehicleInput}
@@ -94,8 +95,8 @@ export default function OuterSiteView() {
               readOnly
             />
             <div className={styles.popupGrid}>
-              <button onClick={() => setVehiclePopupVisible(false)}>Anuluj</button>
-              <button onClick={handleVehicleSubmit}>Aktywuj</button>
+              <button onClick={() => setVehiclePopupVisible(false)}>{t("cancel")}</button>
+              <button onClick={handleVehicleSubmit}>{t("activate")}</button>
             </div>
           </div>
         </div>

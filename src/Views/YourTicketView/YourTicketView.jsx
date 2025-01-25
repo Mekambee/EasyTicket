@@ -5,6 +5,7 @@ import { useLocation } from "wouter";
 import { jsPDF } from "jspdf";
 import qr_code_icon from "../../assets/qr_code.svg";
 import Roboto from "../../assets/fonts/Roboto-Regular.ttf";
+import { useTranslation } from "react-i18next";
 
 const getQueryParams = (queryString) => {
 	const params = new URLSearchParams(queryString);
@@ -18,6 +19,7 @@ const getQueryParams = (queryString) => {
 };
 
 export default function YourTicketView() {
+	const {t} = useTranslation();
 	const { id, price, time, type, isFrozen } = getQueryParams(
 		window.location.search
 	);
@@ -157,15 +159,15 @@ export default function YourTicketView() {
 
 			doc.setTextColor(0, 0, 0);
 			doc.setFontSize(16);
-			doc.text("Potwierdzenie Zakupu Biletu", 105, 40, { align: "center" });
+			doc.text(t("ticket-payment-confirmation-pdf"), 105, 40, { align: "center" });
 
 			doc.setFontSize(14);
 			const ticketDetails = [
-				`Cena biletu: ${price} zł`,
-				`Czas ważności: ${isFrozen ? originalTime : time}`,
-				`Typ biletu: ${type}`,
-				"Przewoźnik: MPK Kraków",
-				"Strefy: I + II + III",
+				`${t("ticket-price-pdf")} ${price} zł`,
+				`${t("ticket-time-pdf")} ${isFrozen ? originalTime : time}`,
+				`${t("ticket-type-pdf")} ${type === "Normalny" ? t("normal-ticket") : t("reduced-ticket")}`,
+				`${t("carrier-pdf")} MPK Kraków`,
+				`${t("zones")}: I + II + III`,
 			];
 
 			let yOffset = 60;
@@ -175,15 +177,15 @@ export default function YourTicketView() {
 			});
 
 			const currentDate = new Date().toLocaleString("pl-PL");
-			doc.text(`Data wygenerowania potwierdzenia: ${currentDate}`, 105, 125, {
+			doc.text(`${t("confirmation-date")} ${currentDate}`, 105, 125, {
 				align: "center",
 			});
 
-			doc.text("Dziękujemy za skorzystanie z naszych usług!", 105, 140, {
+			doc.text(t("thank-you"), 105, 140, {
 				align: "center",
 			});
 
-			doc.save("Potwierdzenie-Zakupu-Biletu.pdf");
+			doc.save(t("file-name"));
 		} catch (error) {
 			alert(error);
 		}
@@ -203,8 +205,8 @@ export default function YourTicketView() {
 					>
 						{remainingTime > 5 && price > 90
 							? isFrozen
-								? "Liczba dostępnych zamrożeń : 0"
-								: "Liczba dostępnych zamrożeń : 1"
+								? <p>{t("remaining-freezes-0")}</p>
+								: <p>{t("remaining-freezes-1")}</p>
 							: ""}
 					</p>
 					<div className={styles.qrCodePlaceholder}>
@@ -213,16 +215,16 @@ export default function YourTicketView() {
 							className={styles.buttonImg}
 							src={qr_code_icon}
 							alt="QR code Icon"
-						/>) : (<p className={styles.redParagraphSmaller}>Bilet stracił ważność <br /><br />
-						Kod QR niedostępny</p>)
+						/>) : (<p className={styles.redParagraphSmaller}>{t("ticket-expired")}<br /><br />
+						{t("qr-code-inaccessible")}</p>)
 						}
 					</div>
 					<div className={styles.ticketInfo}>
-						<p className={styles.paragraph}>Pozostały czas:</p>
+						<p className={styles.paragraph}>{t("remaining-time")}</p>
 						<p className={styles.redParagraph}>
-							{remainingTime === 0 ? "Nieaktywny" : formatTime(remainingTime)}
+							{remainingTime === 0 ? <p>{t("inactive")}</p> : formatTime(remainingTime)}
 						</p>
-						<p className={styles.paragraph}>Identyfikator pojazdu:</p>
+						<p className={styles.paragraph}>{t("vehicle-identifier")}</p>
 						<p className={`${styles.paragraph} ${styles.bolded}`}>HG924</p>
 					</div>
 				</div>
@@ -233,30 +235,32 @@ export default function YourTicketView() {
 					>
 						{originalTime}
 					</p>
-					<p className={`${styles.paragraph} ${styles.bolded}`}>{type}</p>
+					<p className={`${styles.paragraph} ${styles.bolded}`}>
+						{type === "Normalny" ? t("normal-ticket") : t("reduced-ticket")}
+					</p>
 					<p className={styles.paragraph}>MPK Kraków</p>
-					<p className={styles.paragraph}>strefy I+II+III</p>
+					<p className={styles.paragraph}>{t("zones")} I+II+III</p>
 					<p
 						className={`${styles.paragraph} ${styles.bolded} ${styles.enlarge}`}
 					>
-						Cena: {price} zł
+						{t("price")} {price} zł
 					</p>
 					<div className={styles.buttons}>
 						<button
 							className={styles.yourTicketButton}
 							onClick={handleBuyAgain}
 						>
-							Kup Ponownie
+							{t("buy-again")}
 						</button>
 						<button className={styles.yourTicketButton} onClick={generatePDF}>
-							Pobierz Fakturę
+							{t("download-invoice")}
 						</button>
 						{price > 90 && remainingTime > 5 && (
 							<button
 								className={styles.yourTicketButton}
 								onClick={handleFreezeTicket}
 							>
-								Zamróź Bilet
+								{t("freeze-ticket")}
 							</button>
 						)}
 					</div>
@@ -266,12 +270,12 @@ export default function YourTicketView() {
 			{isPopupVisible && (
 				<div className={styles.popup}>
 					<div className={styles.popupContent}>
-						<h2 className={styles.popupTitle}>Ostrzeżenie</h2>
+						<h2 className={styles.popupTitle}>{t("warning")}</h2>
 						<p className={styles.popupText}>
-							Nie możesz zamrozić biletu więcej niż jeden raz.
+							{t("no-more-freeze")}
 						</p>
 						<div className={styles.popupGrid}>
-							<button onClick={() => setPopupVisible(false)}>Powrót</button>
+							<button onClick={() => setPopupVisible(false)}>{t("go-back")}</button>
 						</div>
 					</div>
 				</div>

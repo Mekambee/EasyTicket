@@ -4,11 +4,14 @@ import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import ActiveTicketCardComponent from "../../Components/ActiveTicket/ActiveTicketCardComponent";
 import ActivatedTicketCardComponent from "../../Components/ActivatedTicket/ActivatedTicketCardComponent";
 import ExpiredTicketCardComponent from "../../Components/ExpiredTicket/ExpiredTicketCardComponent";
+import { useTranslation } from "react-i18next";
 
 export default function MyTicketsPage() {
 	const [ownedTickets, setOwnedTickets] = useState([]);
 	const [activeTickets, setActiveTickets] = useState([]);
 	const [expiredTickets, setExpiredTickets] = useState([]);
+
+	const { t } = useTranslation();
 
 	const getQueryParams = () => {
 		const params = new URLSearchParams(window.location.search);
@@ -147,7 +150,7 @@ export default function MyTicketsPage() {
 			<TopBarComponent />
 
 			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Aktywne Bilety</h2>
+				<h2 className={styles.sectionTitle}>{t("active-tickets")}</h2>
 				<div className={styles.ticketGrid}>
 					{activeTickets.map((ticket) => (
 						<ActivatedTicketCardComponent
@@ -165,7 +168,7 @@ export default function MyTicketsPage() {
 			</div>
 
 			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Posiadane Bilety</h2>
+				<h2 className={styles.sectionTitle}>{t("owned-tickets")}</h2>
 				<div className={styles.ticketGrid}>
 					{ownedTickets.map((ticket) => (
 						<ActiveTicketCardComponent
@@ -181,7 +184,7 @@ export default function MyTicketsPage() {
 			</div>
 
 			<div className={styles.section}>
-				<h2 className={styles.sectionTitle}>Historia Biletów</h2>
+				<h2 className={styles.sectionTitle}>{t("ticket-history")}</h2>
 				<div className={styles.ticketGrid}>
 					{expiredTickets.map((ticket) => (
 						<ExpiredTicketCardComponent

@@ -16,6 +16,7 @@
 .qrCodePlaceholder {
 	width: 250px;
 	height: 250px;
+	text-align: center;
 	background-color: #e0e0e0;
 	display: flex;
 	justify-content: center;

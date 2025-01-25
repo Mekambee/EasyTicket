@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styles from "./TicketCardStyle.module.css";
 import { useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export default function TicketCardComponent({ price, time, type }) {
 	const [isTicketBuyPopUpVisible, setTicketBuyPopUpVisible] = useState(false);
 	const [, navigate] = useLocation();
+
+	const { t } = useTranslation();
 
 
 	const handleBuyClick = () => {
@@ -23,10 +26,10 @@ export default function TicketCardComponent({ price, time, type }) {
 			<h2>{time}</h2>
 			<h4>{type}</h4>
 			<p>MPK Kraków</p>
-			<p>strefy I+II+III</p>
+			<p>{t("zones")} I+II+III</p>
 			<h3>{price} zł</h3>
 			<button className={styles.buyButton} onClick={handleBuyClick}>
-				Kup Bilet
+				{t("buy-ticket")}
 			</button>
 
 			{isTicketBuyPopUpVisible && (
@@ -39,15 +42,15 @@ export default function TicketCardComponent({ price, time, type }) {
 					}}
 				>
 					<div className={styles.popupContent}>
-						<h2>Wybierz metodę płatności</h2>
+						<h2>{t("payment-method")}</h2>
 						<div className={styles.popupGrid}>
-							<button onClick={handleOptionClick}>Karta kredytowa</button>
+							<button onClick={handleOptionClick}>{t("credit-card")}</button>
 							<button onClick={handleOptionClick}>BLIK</button>
 							<button onClick={handleOptionClick}>Revolut</button>
 							<button onClick={handleOptionClick}>PayPal</button>
 						</div>
 						<button className={styles.closeButton} onClick={handleClosePopup}>
-							Powrót
+							{t("go-back")}
 						</button>
 					</div>
 				</div>

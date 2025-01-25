@@ -3,9 +3,11 @@ import styles from "./BuyTicketStyle.module.css";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
 import TicketCardComponent from "../../Components/TicketCard/TicketCardComponent";
 import { useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export default function BuyTicketView() {
 	const [discountFlag, setDiscountFlag] = useState(true);
+	const { t } = useTranslation();
 	const handleClick = () => {
 		setDiscountFlag(!discountFlag);
 	};
@@ -22,7 +24,7 @@ export default function BuyTicketView() {
 						}`}
 						onClick={handleClick}
 					>
-						Normalne
+						{t("normal")}
 					</button>
 					<button
 						className={`${styles.toggleButton} ${
@@ -30,7 +32,7 @@ export default function BuyTicketView() {
 						}`}
 						onClick={handleClick}
 					>
-						Ulgowe
+						{t("reduced")}
 					</button>
 					<div className={styles.questionMarkContainer}>
 						<button

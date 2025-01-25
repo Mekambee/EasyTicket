@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import styles from "./ActivatedTicketCardStyle.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ActivatedTicketCardComponent({
 	id,
@@ -12,6 +13,7 @@ export default function ActivatedTicketCardComponent({
 	onExpire,
 }) {
 	const [, navigate] = useLocation();
+	const { t } = useTranslation();
 	const [remainingTime, setRemainingTime] = useState(() => {
 		const now = Math.floor(Date.now() / 1000);
 		const activationTime = Math.floor(new Date(activatedAt).getTime() / 1000);
@@ -69,12 +71,12 @@ export default function ActivatedTicketCardComponent({
 	return (
 		<div className={styles.ticketCard}>
 			<h2>{formatTime(remainingTime)}</h2>
-			<h4>{type}</h4>
+			<h4>{type === "Normalny" ? t("normal-ticket") : t("reduced-ticket")}</h4>
 			<p>MPK Kraków</p>
-			<p>strefy I+II+III</p>
+			<p>{t("zones")} I+II+III</p>
 			<h3>{price} zł</h3>
 			<button className={styles.activateButton} onClick={handleShowTicket}>
-				Pokaż Bilet
+				{t("show-ticket")}
 			</button>
 		</div>
 	);
