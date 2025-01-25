@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import styles from "./HomePageStyle.module.css";
 import HomeButtonComponent from "../../Components/HomeButton/HomeButtonComponent";
 import TopBarComponent from "../../Components/TopBar/TopBarComponent";
+import { useTranslation } from "react-i18next";
 
 const buyTicketText = "Kup bilet";
 const myTicketsText = "Moje bilety";
@@ -14,6 +15,8 @@ export default function HomePage() {
 	const [problemDescription, setProblemDescription] = useState("");
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [triedSubmittingEmpty, setTriedSubmittingEmpty] = useState(false);
+
+	const { t } = useTranslation();
 
 	const handleReportProblemClick = () => {
 		setIsPopupVisible(true);
@@ -42,7 +45,8 @@ export default function HomePage() {
 		<div className={styles.homeBody}>
 			<TopBarComponent />
 			<div className={styles.content}>
-				<h1>Witaj w Easy Ticket!</h1>
+				{/* <h1>Witaj w Easy Ticket!</h1> */}
+				<h1>{t("welcome")}</h1>
 				<div className={styles.buttonBox}>
 					<div className={styles.navlink}>
 						<Link to="/buy-ticket">

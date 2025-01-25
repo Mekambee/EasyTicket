@@ -10,10 +10,12 @@
 		"@testing-library/user-event": "^13.5.0",
 		"@types/leaflet": "^1.9.15",
 		"geojson": "^0.5.0",
+		"i18next": "^24.2.2",
 		"jspdf": "^2.5.2",
 		"leaflet": "^1.9.4",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
+		"react-i18next": "^15.4.0",
 		"react-scripts": "5.0.1",
 		"temporal-polyfill": "^0.2.5",
 		"web-vitals": "^2.1.4",
@@ -50,6 +52,8 @@
 		"@babel/preset-env": "^7.26.0",
 		"@babel/preset-react": "^7.25.9",
 		"@types/node": "^22.10.0",
-		"gh-pages": "^6.2.0"
+		"@typescript-eslint/parser": "^5.62.0",
+		"gh-pages": "^6.2.0",
+		"typescript": "^5.7.3"
 	}
 }

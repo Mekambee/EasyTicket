@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "wouter";
+import { useEffect, useState } from "react";
+
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 import contrast_1_icon from "../../assets/contrast-1.svg";
 import contrast_2_icon from "../../assets/contrast-2.svg";
@@ -7,11 +11,28 @@ import contrast_3_icon from "../../assets/contrast-3.svg";
 import font_size_1_icon from "../../assets/font-size-1.svg";
 import font_size_2_icon from "../../assets/font-size-2.svg";
 import font_size_3_icon from "../../assets/font-size-3.svg";
-import language_pl_icon from "../../assets/language-pl.svg";
+import languagePlIcon from "../../assets/languagePlIcon.svg";
+import languageEnIcon from "../../assets/languageEnIcon.svg";
 
 import styles from "./TopBarStyle.module.css";
 
 export default function TopBarComponent({ noStyleButtons }) {
+	const { t } = useTranslation();
+	const [currentLanguage, setCurrentLanguage] = useState("pl");
+
+	useEffect(() => {
+		const savedLanguage = localStorage.getItem("language") || "pl";
+		setCurrentLanguage(savedLanguage);
+		i18n.changeLanguage(savedLanguage);
+	}, []);
+
+	const toggleLanguage = () => {
+		const newLanguage = currentLanguage === "pl" ? "en" : "pl";
+		setCurrentLanguage(newLanguage);
+		i18n.changeLanguage(newLanguage);
+		localStorage.setItem("language", newLanguage);
+	};
+
 	return (
 		<div className={styles.topBar}>
 			<Link
@@ -135,11 +156,11 @@ export default function TopBarComponent({ noStyleButtons }) {
 						</button>
 					</div>
 					<div className={styles.buttonGroup}>
-						<button className={styles.button}>
+						<button className={styles.button} onClick={toggleLanguage}>
 							<img
 								className={styles.buttonImg}
-								src={language_pl_icon}
-								alt="Language - PL"
+								src={currentLanguage === "pl" ? languageEnIcon : languagePlIcon}
+								alt={t("language")}
 							/>
 						</button>
 					</div>
