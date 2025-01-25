@@ -54,6 +54,6 @@
 		"@types/node": "^22.10.0",
 		"@typescript-eslint/parser": "^5.62.0",
 		"gh-pages": "^6.2.0",
-		"typescript": "^5.7.3"
+		"typescript": "^4.9.5"
 	}
 }
