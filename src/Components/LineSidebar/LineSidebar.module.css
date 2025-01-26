@@ -31,6 +31,7 @@
 	height: 2rem;
 	margin: 0;
 	padding: 0;
+	color: var(--fg-color);
 }
 
 .refresh {
@@ -46,6 +47,7 @@
 	height: 2rem;
 	margin: 0;
 	padding: 0;
+	color: var(--fg-color);
 }
 
 .locate {
@@ -61,6 +63,7 @@
 	height: 2rem;
 	margin: 0;
 	padding: 0;
+	color: var(--fg-color);
 }
 
 .title {
