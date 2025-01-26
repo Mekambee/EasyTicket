@@ -1,5 +1,6 @@
 .wrapper {
 	display: flex;
+	cursor: pointer;
 	flex-direction: column;
 	margin: calc(1rem - 1px);
 	padding: 0.5rem 1rem;
