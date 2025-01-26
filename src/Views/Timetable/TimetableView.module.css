@@ -11,7 +11,7 @@
 
 .search {
 	border: 1px solid var(--fg-color);
-	color: var(--fg-grey);
+	color: var(--fg-color);
 	border-radius: 0.5rem;
 	outline: none;
 	background: none;
@@ -19,6 +19,10 @@
 	font-size: 1rem;
 	padding: 0.25rem 0.5rem;
 	margin: 0.5rem;
+}
+
+.search::placeholder {
+	color: var(--fg-grey);
 }
 
 .content {
