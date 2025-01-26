@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { get_routes, RouteSearchMode } from "../../api.ts";
 import type { Route } from "../../api.ts";
@@ -21,6 +22,7 @@ export default function SearchRouteView({ system }: { system: string }) {
 }
 
 const Sidebar = ({ system }) => {
+	const { t } = useTranslation(undefined, { keyPrefix: "route" });
 	const map_ctx = useContext(MapCtx)!;
 	const [mode, setMode] = useState<RouteSearchMode>("fastest");
 	const [from, setFrom] = useState("");
@@ -69,7 +71,7 @@ const Sidebar = ({ system }) => {
 
 			<div className={style.inputs}>
 				<label className={style.input}>
-					Z{" "}
+					{t("from")}{" "}
 					<select onChange={(e) => setFrom(e.currentTarget.value)}>
 						<option key="" value=""></option>
 						{STOPS.map((s) => (
@@ -80,7 +82,7 @@ const Sidebar = ({ system }) => {
 					</select>
 				</label>
 				<label className={style.input}>
-					Do{" "}
+					{t("to")}{" "}
 					<select onChange={(e) => setTo(e.currentTarget.value)}>
 						<option key="" value=""></option>
 						{STOPS.map((s) => (
@@ -95,9 +97,9 @@ const Sidebar = ({ system }) => {
 			<div className={style.modes}>
 				{(
 					[
-						["fastest", "Najszybciej"],
-						["fewest transfers", "Najmniej Przesiadek"],
-						["least walking", "Najmniej Chodzenia"],
+						["fastest", t("fastest")],
+						["fewest transfers", t("fewest-transfers")],
+						["least walking", t("least-walking")],
 					] as [RouteSearchMode, string][]
 				).map(([m, text]) => (
 					<span
@@ -111,10 +113,7 @@ const Sidebar = ({ system }) => {
 			</div>
 
 			{results.length === 0 ? (
-				<p className={style.explanation}>
-					Po wybraniu nazwy przystanku początkowego i przystanku końcowego tu
-					pokażą się wyniki wyszukiwania trasy.
-				</p>
+				<p className={style.explanation}>{t("after-selecting")}</p>
 			) : null}
 
 			{results.map((res, i) => (

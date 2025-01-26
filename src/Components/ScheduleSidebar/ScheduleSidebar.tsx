@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
+import { useTranslation } from "react-i18next";
 import { Temporal } from "temporal-polyfill";
+import { TFunction } from "i18next";
 
 import back_icon from "../../assets/back.svg";
 import refresh_icon from "../../assets/refresh.svg";
@@ -21,6 +23,7 @@ export default function ScheduleSidebar({
 	system: string;
 	id: string;
 }) {
+	const { t } = useTranslation();
 	const { map, highlighted } = useContext(MapCtx)!;
 	const [refresh_counter, refresh_inner] = useState<number>(0);
 	const refresh = () => {
@@ -114,14 +117,18 @@ export default function ScheduleSidebar({
 				<TopBarComponent noStyleButtons />
 				<div className={style.header}>
 					<button onClick={() => window.history.back()} className={style.back}>
-						<img className={style.backicon} src={back_icon} alt="wróć" />
+						<img
+							className={style.backicon}
+							src={back_icon}
+							alt={t("sidebar.back")}
+						/>
 					</button>
-					<h1 className={style.title}>Błąd</h1>
+					<h1 className={style.title}>{t("sidebar.error")}</h1>
 					<button className={style.refresh} onClick={() => refresh()}>
 						<img
 							className={style.refreshicon}
 							src={refresh_icon}
-							alt="odśwież"
+							alt={t("sidebar.refresh")}
 						/>
 					</button>
 				</div>
@@ -134,7 +141,11 @@ export default function ScheduleSidebar({
 			<TopBarComponent noStyleButtons />
 			<div className={style.header}>
 				<button onClick={() => window.history.back()} className={style.back}>
-					<img className={style.backicon} src={back_icon} alt="wróć" />
+					<img
+						className={style.backicon}
+						src={back_icon}
+						alt={t("sidebar.back")}
+					/>
 				</button>
 				<h1 className={style.name}>
 					{schedule === null ? "" : schedule?.name}
@@ -153,7 +164,7 @@ export default function ScheduleSidebar({
 					<img
 						className={style.locateicon}
 						src={locate_icon}
-						alt="pokaż na mapie"
+						alt={t("sidebar.locate")}
 					/>
 				</button>
 			</div>
@@ -167,7 +178,7 @@ export default function ScheduleSidebar({
 						setTab("arrivals");
 					}}
 				>
-					Odjazdy
+					{t("schedule.departures")}
 				</a>
 				<a
 					href="#schedule"
@@ -177,7 +188,7 @@ export default function ScheduleSidebar({
 						setTab("schedule");
 					}}
 				>
-					Rozkład jazdy
+					{t("schedule.timetable")}
 				</a>
 
 				{schedule === null ? null : (
@@ -207,7 +218,7 @@ export default function ScheduleSidebar({
 					) : tab === "arrivals" ? (
 						arrivals_content(schedule, filter, system)
 					) : (
-						schedule_content(schedule, filter)
+						schedule_content(schedule, filter, t)
 					)}
 				</div>
 			</div>
@@ -253,7 +264,11 @@ function arrivals_content(
 		));
 }
 
-function schedule_content(schedule: StopSchedule, filter: string | null) {
+function schedule_content(
+	schedule: StopSchedule,
+	filter: string | null,
+	t: TFunction
+) {
 	const named_schedule: {
 		[name in string]?: {
 			id: string;
@@ -310,13 +325,13 @@ function schedule_content(schedule: StopSchedule, filter: string | null) {
 							<thead>
 								<tr>
 									<th scope="col"></th>
-									<th scope="col">PON</th>
-									<th scope="col">WTO</th>
-									<th scope="col">ŚRO</th>
-									<th scope="col">CZW</th>
-									<th scope="col">PIĄ</th>
-									<th scope="col">SOB</th>
-									<th scope="col">NIE</th>
+									<th scope="col">{t("schedule.monday")}</th>
+									<th scope="col">{t("schedule.tuesday")}</th>
+									<th scope="col">{t("schedule.wednesday")}</th>
+									<th scope="col">{t("schedule.thursday")}</th>
+									<th scope="col">{t("schedule.friday")}</th>
+									<th scope="col">{t("schedule.saturday")}</th>
+									<th scope="col">{t("schedule.sunday")}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -349,30 +364,22 @@ function schedule_content(schedule: StopSchedule, filter: string | null) {
 				</div>
 			))}
 
-			<h3 className={style.noteheading}>Uwaga</h3>
+			<h3 className={style.noteheading}>{t("schedule.note")}</h3>
 			<p className={style.note}>
-				Na tym przystanku mogą być dostępne dodatkowe usługi w następujących
-				terminach:{" "}
-				{schedule.schedule.additional
-					.map((d) => Temporal.PlainDate.from(d).toLocaleString())
-					.join(", ")}
-				. Szczegółowe informacje można znaleźć w zakładce odjazdy.
+				{t("schedule.extra-service", {
+					val: schedule.schedule.additional.map((d) =>
+						Temporal.PlainDate.from(d).toLocaleString()
+					),
+				})}
 			</p>
 			<p className={style.note}>
-				Usługa na tym przystanku może zostać usunięta lub ograniczona w
-				następujących terminach:{" "}
-				{schedule.schedule.additional
-					.map((d) => Temporal.PlainDate.from(d).toLocaleString())
-					.join(", ")}
-				. Szczegółowe informacje można znaleźć w zakładce przyjazdy.
+				{t("schedule.removed-service", {
+					val: schedule.schedule.removed.map((d) =>
+						Temporal.PlainDate.from(d).toLocaleString()
+					),
+				})}
 			</p>
-			<p className={style.note}>
-				Powyższe rozkłady pokazują wszystkie zaplanowane przystanki na tym
-				przystanku, w tym zaplanowane przystanki, które są częścią usług
-				ograniczonych czasowo. W rezultacie powyższe rozkłady mogą pokazywać
-				zbyt wiele zaplanowanych przystanków. Szczegółowe informacje można
-				znaleźć na karcie przylotów.
-			</p>
+			<p className={style.note}>{t("schedule.disclaimer")}</p>
 		</>
 	);
 }

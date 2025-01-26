@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-hash-location";
+import { useTranslation } from "react-i18next";
 
 import back_icon from "../../assets/back.svg";
 import locate_icon from "../../assets/locate.svg";
@@ -20,6 +21,7 @@ export default function LineSidebar({
 	system: string;
 	id: string;
 }) {
+	const { t } = useTranslation();
 	const [refresh_counter, refresh_inner] = useState<number>(0);
 	const refresh = () => {
 		setSchedule(null);
@@ -55,14 +57,18 @@ export default function LineSidebar({
 				<TopBarComponent noStyleButtons />
 				<div className={style.header}>
 					<button onClick={() => window.history.back()} className={style.back}>
-						<img className={style.backicon} src={back_icon} alt="wróć" />
+						<img
+							className={style.backicon}
+							src={back_icon}
+							alt={t("schedule.back")}
+						/>
 					</button>
-					<h1 className={style.title}>Błąd</h1>
+					<h1 className={style.title}>{t("schedule.error")}</h1>
 					<button className={style.refresh} onClick={() => refresh()}>
 						<img
 							className={style.refreshicon}
 							src={refresh_icon}
-							alt="odśwież"
+							alt={t("sidebar.refresh")}
 						/>
 					</button>
 				</div>
@@ -75,7 +81,11 @@ export default function LineSidebar({
 			<TopBarComponent noStyleButtons />
 			<div className={style.header}>
 				<button onClick={() => window.history.back()} className={style.back}>
-					<img className={style.backicon} src={back_icon} alt="wróć" />
+					<img
+						className={style.backicon}
+						src={back_icon}
+						alt={t("sidebar.back")}
+					/>
 				</button>
 				<div className={style.title}>
 					<h1 className={style.name}>
@@ -96,7 +106,7 @@ export default function LineSidebar({
 					<img
 						className={style.locateicon}
 						src={locate_icon}
-						alt="pokaż na mapie"
+						alt={t("sidebar.locate")}
 					/>
 				</button>
 			</div>
@@ -106,7 +116,7 @@ export default function LineSidebar({
 					<Loading />
 				) : (
 					schedule.stops.map((s, i) => (
-						<>
+						<React.Fragment key={i}>
 							{i === 0 ? null : <div className={style.gap}>&zwnj;</div>}
 
 							<div
@@ -118,11 +128,11 @@ export default function LineSidebar({
 								<img
 									className={style.stopicon}
 									src={get_stop_icon(schedule.type)}
-									alt={`przystanek ${get_type_name(schedule.type)}`}
+									alt={`${t(`stop-type.${get_type_name(schedule.type)}`)}`}
 								/>
 								<span className={style.stopname}>{s.name}</span>
 							</div>
-						</>
+						</React.Fragment>
 					))
 				)}
 			</div>

@@ -104,33 +104,33 @@ export function cmp(a: string[], b: string[]): number {
 export function get_type_name(type: VehicleType): string {
 	switch (type) {
 		case VehicleType.Railway:
-			return "kolejowy"; // return "railway";
+			return "railway";
 		case VehicleType.Coach:
-			return "autokarowy"; // return "coach";
+			return "coach";
 		case VehicleType.Metro:
-			return "metro"; // return "metro";
+			return "metro";
 		case VehicleType.Monorail:
-			return "jednoszynowe"; // return "monorail";
+			return "monorail";
 		case VehicleType.Bus:
-			return "autobusowy"; // return "bus";
+			return "bus";
 		case VehicleType.Trolleybus:
-			return "trolejbusowy"; // return "trolleybus";
+			return "trolleybus";
 		case VehicleType.Tram:
-			return "tramwajowy"; // return "tram";
+			return "tram";
 		case VehicleType.Water:
-			return "wodny"; // return "water";
+			return "water";
 		case VehicleType.Air:
-			return "powietrzny"; // return "air";
+			return "air";
 		case VehicleType.Ferry:
-			return "promowy"; // return "ferry";
+			return "ferry";
 		case VehicleType.Aerial:
-			return "napowietrznej kolei linowej"; // return "aerial";
+			return "aerial";
 		case VehicleType.Funicular:
-			return "kolei linowo-terenowej"; // return "funicular";
+			return "funicular";
 		case VehicleType.Taxi:
-			return "taksówkowy"; // return "taxi";
+			return "taxi";
 		case VehicleType.Other:
-			return "inny"; // return "other";
+			return "other";
 	}
 }
 

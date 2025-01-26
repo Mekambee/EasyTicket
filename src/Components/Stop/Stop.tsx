@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { navigate } from "wouter/use-hash-location";
+import { useTranslation } from "react-i18next";
+
 import { MapCtx } from "../Map/Map.tsx";
 import { VehicleType } from "../../api.ts";
 import { cmp, get_type_name, get_vehicle_icon } from "../../util.ts";
@@ -16,6 +18,7 @@ export default function Stop({
 	name: string;
 	lines: { id: string; name: string; headsign: string; type: VehicleType }[];
 }) {
+	const { t } = useTranslation();
 	const { highlighted } = useContext(MapCtx)!;
 	useEffect(
 		() => () => {
@@ -51,7 +54,7 @@ export default function Stop({
 							<img
 								className={style.linetype}
 								src={get_vehicle_icon(l.type)}
-								alt={`${get_type_name(l.type)} line`}
+								alt={t(`line-type.${get_type_name(l.type)}`)}
 							/>
 							<span className={style.linename}>{l.name}</span>
 							<span className={style.lineheadsign}>{l.headsign}</span>

@@ -30,9 +30,9 @@
 	"credit-card": "Credit card",
 
 	"normal": "Normal",
-    "normal-ticket": "Normal",
+	"normal-ticket": "Normal",
 	"reduced": "Reduced",
-    "reduced-ticket": "Reduced",
+	"reduced-ticket": "Reduced",
 
 	"your-bank": "Your bank",
 	"confirm-payment": "Confirm payment",
@@ -51,19 +51,112 @@
 	"no-more-freeze": "You cannot freeze the ticket more than once.",
 	"price": "Price:",
 	"warning": "Warning",
-    "inactive": "Inactive",
-    "operator": "Public Transit Operator",
-    "here-is-desc": "Here is a detailed description of the reduced fare rules",
-    "in-tickets": "in tickets of the public transit operator MPK Kraków",
-    "go-back-to-buy-ticket": "Go back to buy a ticket",
-    "remaining-freezes-0": "Number of available freezes: 0",
-    "remaining-freezes-1": "Number of available freezes: 1",
-    "ticket-payment-confirmation-pdf": "Ticket purchase confirmation",
-    "ticket-price-pdf": "Ticket Price:",
-    "ticket-time-pdf": "Ticket time:",
-    "ticket-type-pdf": "Ticket type:",
-    "carrier-pdf": "Carrier:",
-    "confirmation-date": "Confirmation generated At:",
-    "thank-you": "Thank you for using our services!",
-    "file-name": "Ticket-purchase-confirmation.pdf"
+	"inactive": "Inactive",
+	"operator": "Public Transit Operator",
+	"here-is-desc": "Here is a detailed description of the reduced fare rules",
+	"in-tickets": "in tickets of the public transit operator MPK Kraków",
+	"go-back-to-buy-ticket": "Go back to buy a ticket",
+	"remaining-freezes-0": "Number of available freezes: 0",
+	"remaining-freezes-1": "Number of available freezes: 1",
+	"ticket-payment-confirmation-pdf": "Ticket purchase confirmation",
+	"ticket-price-pdf": "Ticket Price:",
+	"ticket-time-pdf": "Ticket time:",
+	"ticket-type-pdf": "Ticket type:",
+	"carrier-pdf": "Carrier:",
+	"confirmation-date": "Confirmation generated At:",
+	"thank-you": "Thank you for using our services!",
+	"file-name": "Ticket-purchase-confirmation.pdf",
+
+	"search": "Search",
+	"loading": "Loading",
+	"no-stops-found": "No stops found.",
+
+	"route": {
+		"from": "From",
+		"to": "To",
+
+		"fastest": "Fastest",
+		"fewest-transfers": "Fewest Transfers",
+		"least-walking": "Least Walking",
+
+		"after-selecting": "Search results will be shown here after selecting the beginning and end stops."
+	},
+
+	"sidebar": {
+		"error": "Error",
+		"back": "Back",
+		"refresh": "Refresh",
+		"locate": "Show on map"
+	},
+
+	"schedule": {
+		"departures": "Departures",
+		"timetable": "Timetable",
+		"monday": "MON",
+		"tuesday": "TUE",
+		"wednesday": "WED",
+		"thursday": "THU",
+		"friday": "FRI",
+		"saturday": "SAT",
+		"sunday": "SUN",
+		"note": "Note",
+		"extra-service": "There may be additional service at this stop on the following dates: {{val, list}}. Please check the departures tab for details.",
+		"removed-service": "Service at this stop may be removed or reduced on the following dates: {{val, list}}. Please check the departures tab for details.",
+		"disclaimer": "The above schedules show all scheduled stops at this stop, including scheduled stops that are part of time-limited services. As a result, the above schedules may appear to show too many scheduled stops. Please check the departures tab for details.",
+		"scheduled": "scheduled",
+		"on-time": "on time",
+		"late": "{{val}} min late",
+		"early": "{{val}} min early"
+	},
+
+	"vehicle-type": {
+		"railway": "railway",
+		"coach": "coach",
+		"metro": "metro",
+		"monorail": "monorail",
+		"bus": "bus",
+		"trolleybus": "trolleybus",
+		"tram": "tram",
+		"water": "water",
+		"air": "air",
+		"ferry": "ferry",
+		"aerial": "aerial",
+		"funicular": "funicular",
+		"taxi": "taxi",
+		"other": "other"
+	},
+
+	"line-type": {
+		"railway": "railway line",
+		"coach": "coach line",
+		"metro": "metro line",
+		"monorail": "monorail line",
+		"bus": "bus line",
+		"trolleybus": "trolleybus line",
+		"tram": "tram line",
+		"water": "water line",
+		"air": "air line",
+		"ferry": "ferry line",
+		"aerial": "aerial line",
+		"funicular": "funicular line",
+		"taxi": "taxi line",
+		"other": "other line"
+	},
+
+	"stop-type": {
+		"railway": "railway stop",
+		"coach": "coach stop",
+		"metro": "metro stop",
+		"monorail": "monorail stop",
+		"bus": "bus stop",
+		"trolleybus": "trolleybus stop",
+		"tram": "tram stop",
+		"water": "water stop",
+		"air": "air stop",
+		"ferry": "ferry stop",
+		"aerial": "aerial stop",
+		"funicular": "funicular stop",
+		"taxi": "taxi stop",
+		"other": "other stop"
+	}
 }

@@ -1,4 +1,6 @@
 import React, { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { VehicleType } from "../../api.ts";
 import { get_stop_icon, get_type_name } from "../../util.ts";
 import unexpand_icon from "../../assets/unexpand.svg";
@@ -14,6 +16,7 @@ export default function StopGroup({
 	types: VehicleType[];
 	children: ReactNode;
 }) {
+	const { t } = useTranslation();
 	const [expanded, setExpanded] = useState(false);
 
 	return (
@@ -25,7 +28,7 @@ export default function StopGroup({
 							key={type}
 							className={style.icon}
 							src={get_stop_icon(type)}
-							alt={`${get_type_name(type)} stop`}
+							alt={t(`stop-type.${get_type_name(type)}`)}
 						/>
 					))}
 					<span className={style.name}>{name}</span>

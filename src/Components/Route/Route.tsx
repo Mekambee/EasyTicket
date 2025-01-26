@@ -1,5 +1,6 @@
 import React from "react";
 import { Temporal } from "temporal-polyfill";
+import { useTranslation } from "react-i18next";
 
 import { get_type_name, get_vehicle_icon } from "../../util.ts";
 import { VehicleType } from "../../api.ts";
@@ -22,6 +23,8 @@ export default function Route({
 		lines: { name: string; id: string; type: VehicleType }[];
 	}[];
 }) {
+	const { t } = useTranslation();
+
 	return (
 		<div
 			onClick={onClick}
@@ -41,7 +44,11 @@ export default function Route({
 						<img
 							className={style.legicon}
 							src={get_vehicle_icon(l.lines[0]?.type ?? VehicleType.Other)}
-							alt={get_type_name(l.lines[0]?.type ?? VehicleType.Other)}
+							alt={t(
+								`vehicle-type.${get_type_name(
+									l.lines[0]?.type ?? VehicleType.Other
+								)}`
+							)}
 						/>
 
 						<span className={style.lines}>

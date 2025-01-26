@@ -11,11 +11,17 @@ import {
 	VehicleType,
 	get_shape,
 } from "../../api.ts";
-import { cmp, get_stop_icon, get_vehicle_icon } from "../../util.ts";
+import {
+	cmp,
+	get_stop_icon,
+	get_type_name,
+	get_vehicle_icon,
+} from "../../util.ts";
 import layers from "../../layers.json";
 import style from "./Map.module.css";
 import "leaflet/dist/leaflet.css";
 import "../../Styles/Map.css";
+import i18n from "../../i18n.js";
 
 export const MapCtx = createContext<{
 	map: L.Map;
@@ -197,7 +203,9 @@ export default class Map extends Component<
 
 				for (const stop of stops) {
 					this.stops[stop.id] = L.marker([stop.lat, stop.lon], {
-						alt: stop.name,
+						alt: `${stop.name.replaceAll("‒", "–")} ‒ ${i18n.t(
+							`stop-type.${get_type_name(stop.types[0] ?? VehicleType.Other)}`
+						)}`,
 						title: `${stop.name} (${[
 							...new Set(Object.values(stop.lines).map((l) => l!.name)),
 						]
@@ -235,7 +243,7 @@ export default class Map extends Component<
 							this.highlighted.value.length > 1
 						) {
 							marker
-								?.bindPopup(marker.options.alt, {
+								?.bindPopup(marker.options.alt.split(" ‒ ", 1)[0], {
 									autoClose: false,
 									interactive: false,
 									keepInView: false,
@@ -262,6 +270,7 @@ export default class Map extends Component<
 					vehicle_markers.set(
 						vehicle.id,
 						L.marker([vehicle.lat, vehicle.lon], {
+							alt: i18n.t(`vehicle-type.${get_type_name(vehicle.type)}`),
 							title: `${vehicle.line_name} ${vehicle.headsign} (${vehicle.name})`,
 							draggable: false,
 							icon: L.icon({
@@ -311,6 +320,7 @@ export default class Map extends Component<
 								vehicle_markers.set(
 									vehicle.id,
 									L.marker([vehicle.lat, vehicle.lon], {
+										alt: i18n.t(`vehicle-type.${get_type_name(vehicle.type)}`),
 										title: `${vehicle.line_name} ${vehicle.headsign} (${vehicle.name})`,
 										draggable: false,
 										icon: L.icon({

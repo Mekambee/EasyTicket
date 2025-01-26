@@ -30,9 +30,9 @@
 	"credit-card": "Karta kredytowa",
 
 	"normal": "Normalne",
-    "normal-ticket": "Normalny",
+	"normal-ticket": "Normalny",
 	"reduced": "Ulgowe",
-    "reduced-ticket": "Ulgowy",
+	"reduced-ticket": "Ulgowy",
 
 	"your-bank": "Twój bank",
 	"confirm-payment": "Potwierdź płatność",
@@ -51,19 +51,112 @@
 	"no-more-freeze": "Nie możesz zamrozić biletu więcej niż jeden raz.",
 	"price": "Cena:",
 	"warning": "Ostrzeżenie",
-    "inactive": "Nieaktywny",
-    "operator": "Operator Komunikacji Miejskiej",
-    "here-is-desc": "Tutaj znajduje się dokładny opis dotyczący zasad ulg",
-    "in-tickets": "w biletach komunikacji miejskiej MPK Kraków",
-    "go-back-to-buy-ticket": "Powrót do zakupu biletu",
-    "remaining-freezes-0": "Liczba dostępnych zamrożeń: 0",
-    "remaining-freezes-1": "Liczba dostępnych zamrożeń: 1",
-    "ticket-payment-confirmation-pdf": "Potwierdzenie zakupu biletu",
-    "ticket-price-pdf": "Cena biletu:",
-    "ticket-time-pdf": "Czas ważności:",
-    "ticket-type-pdf": "Typ biletu:",
-    "carrier-pdf": "Przewoźnik:",
-    "confirmation-date": "Data wygenerowania potwierdzenia:",
-    "thank-you": "Dziękujemy za skorzystanie z naszych usług!",
-    "file-name": "Potwierdzenie-Zakupu-Biletu.pdf"
+	"inactive": "Nieaktywny",
+	"operator": "Operator Komunikacji Miejskiej",
+	"here-is-desc": "Tutaj znajduje się dokładny opis dotyczący zasad ulg",
+	"in-tickets": "w biletach komunikacji miejskiej MPK Kraków",
+	"go-back-to-buy-ticket": "Powrót do zakupu biletu",
+	"remaining-freezes-0": "Liczba dostępnych zamrożeń: 0",
+	"remaining-freezes-1": "Liczba dostępnych zamrożeń: 1",
+	"ticket-payment-confirmation-pdf": "Potwierdzenie zakupu biletu",
+	"ticket-price-pdf": "Cena biletu:",
+	"ticket-time-pdf": "Czas ważności:",
+	"ticket-type-pdf": "Typ biletu:",
+	"carrier-pdf": "Przewoźnik:",
+	"confirmation-date": "Data wygenerowania potwierdzenia:",
+	"thank-you": "Dziękujemy za skorzystanie z naszych usług!",
+	"file-name": "Potwierdzenie-Zakupu-Biletu.pdf",
+
+	"search": "Szukaj",
+	"loading": "Ładowanie",
+	"no-stops-found": "Nie znaleziono przystanków.",
+
+	"route": {
+		"from": "Z",
+		"to": "Do",
+
+		"fastest": "Najszybciej",
+		"fewest-transfers": "Najmniej Przesiadek",
+		"least-walking": "Najmniej Chodzenia",
+
+		"after-selecting": "Po wybraniu nazwy przystanku początkowego i przystanku końcowego tu pokażą się wyniki wyszukiwania trasy."
+	},
+
+	"sidebar": {
+		"error": "Błąd",
+		"back": "Wróć",
+		"refresh": "Odśwież",
+		"locate": "Pokaż na mapie"
+	},
+
+	"schedule": {
+		"departures": "Odjazdy",
+		"timetable": "Rozkład jazdy",
+		"monday": "PON",
+		"tuesday": "WTO",
+		"wednesday": "ŚRO",
+		"thursday": "CZW",
+		"friday": "PIĄ",
+		"saturday": "SOB",
+		"sunday": "NIE",
+		"note": "Uwaga",
+		"extra-service": "Na tym przystanku mogą być dostępne dodatkowe usługi w następujących terminach: {{val, list}}. Szczegółowe informacje można znaleźć w zakładce odjazdy.",
+		"removed-service": "Usługa na tym przystanku może zostać usunięta lub ograniczona w następujących terminach: {{val, list}}. Szczegółowe informacje można znaleźć w zakładce przyjazdy.",
+		"disclaimer": "Powyższe rozkłady pokazują wszystkie zaplanowane zatrzymania na tym przystanku, w tym zaplanowane zatrzymania, które są częścią usług ograniczonych czasowo. W rezultacie powyższe rozkłady mogą pokazywać zbyt wiele zaplanowanych zatrzymań. Szczegółowe informacje można znaleźć w zakładce odjazdy.",
+		"scheduled": "zaplanowany",
+		"on-time": "punktualny",
+		"late": "opóźniony o {{val}} min",
+		"early": "zawcześniony o {{val}} min"
+	},
+
+	"vehicle-type": {
+		"railway": "kolejowy",
+		"coach": "autokarowy",
+		"metro": "metro",
+		"monorail": "jednoszynowe",
+		"bus": "autobusowy",
+		"trolleybus": "trolejbusowy",
+		"tram": "tramwajowy",
+		"water": "wodny",
+		"air": "powietrzny",
+		"ferry": "promowy",
+		"aerial": "napowietrznej kolei linowej",
+		"funicular": "kolei linowo-terenowej",
+		"taxi": "taksówkowy",
+		"other": "inny"
+	},
+
+	"line-type": {
+		"railway": "linia kolejowa",
+		"coach": "linia autokarowa",
+		"metro": "linia metro",
+		"monorail": "linia jednoszynowa",
+		"bus": "linia autobusowa",
+		"trolleybus": "linia trolejbusowa",
+		"tram": "linia tramwajowa",
+		"water": "linia wodna",
+		"air": "linia powietrzna",
+		"ferry": "linia promowa",
+		"aerial": "linia napowietrznej kolei linowej",
+		"funicular": "linia kolei linowo-terenowej",
+		"taxi": "linia taksówkowa",
+		"other": "inna linia"
+	},
+
+	"stop-type": {
+		"railway": "przystanek kolejowy",
+		"coach": "przystanek autokarowy",
+		"metro": "przystanek metro",
+		"monorail": "przystanek jednoszynowy",
+		"bus": "przystanek autobusowy",
+		"trolleybus": "przystanek trolejbusowy",
+		"tram": "przystanek tramwajowy",
+		"water": "przystanek wodny",
+		"air": "przystanek powietrzny",
+		"ferry": "przystanek promowy",
+		"aerial": "przystanek napowietrznej kolei linowej",
+		"funicular": "przystanek kolei linowo-terenowej",
+		"taxi": "przystanek taksówkowy",
+		"other": "inny przystanek"
+	}
 }

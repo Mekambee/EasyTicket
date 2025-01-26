@@ -4,6 +4,7 @@ import { Temporal } from "temporal-polyfill";
 import { get_type_name, get_vehicle_icon } from "../../util.ts";
 import { VehicleType } from "../../api.ts";
 import style from "./ScheduledStop.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ScheduledStop({
 	now,
@@ -22,6 +23,8 @@ export default function ScheduledStop({
 		delay?: [number, number | undefined];
 	};
 }) {
+	const { t } = useTranslation();
+
 	return (
 		<div
 			key={`${line}-${arrival.toString()}`}
@@ -34,7 +37,7 @@ export default function ScheduledStop({
 				<img
 					className={style.icon}
 					src={get_vehicle_icon(type)}
-					alt={`${get_type_name(type)}`}
+					alt={t(`vehicle-type.${get_type_name(type)}`)}
 				/>
 				<span className={style.name}>{name}</span>
 				<span className={style.headsign}>{headsign}</span>
@@ -53,12 +56,14 @@ export default function ScheduledStop({
 				</span>
 				<span className={style.delay}>
 					{delay?.[0] === undefined
-						? "zaplanowany"
+						? t("schedule.scheduled")
 						: delay?.[0] === 0
-						? "punktualny"
-						: `${delay?.[0] >= 0 ? "opóźniony" : "zawcześniony"} o ${Math.abs(
-								delay?.[0] / 60
-						  ).toFixed(1)} min`}
+						? t("schedule.on-time")
+						: delay?.[0] >= 0
+						? t("schedule.late", { val: Math.abs(delay?.[0] / 60).toFixed(1) })
+						: t("schedule.early", {
+								val: Math.abs(delay?.[0] / 60).toFixed(1),
+						  })}
 				</span>
 			</p>
 		</div>

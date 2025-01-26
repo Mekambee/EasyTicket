@@ -1,5 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Switch, Route } from "wouter";
+import { TFunction } from "i18next";
+
 import TopBarComponent from "../../Components/TopBar/TopBarComponent.jsx";
 import Map from "../../Components/Map/Map.tsx";
 import Loading from "../../Components/Loading/Loading.tsx";
@@ -8,20 +11,21 @@ import LineSidebar from "../../Components/LineSidebar/LineSidebar.tsx";
 import Stop from "../../Components/Stop/Stop.tsx";
 import StopGroup from "../../Components/StopGroup/StopGroup.tsx";
 import { cmp } from "../../util.ts";
-import style from "./TimetableView.module.css";
 import { get_stops } from "../../api.ts";
+import style from "./TimetableView.module.css";
 
 export default function TimetableView({ system }: { system: string }) {
+	const { t } = useTranslation();
 	const [search, setSearch] = useState<string>("");
 	const [content, setContent] = useState<
 		ReactNode | ((search: string) => ReactNode)
 	>(<Loading />);
 
 	useEffect(() => {
-		stops(system).then((s) => {
+		stops(system, t).then((s) => {
 			setContent(() => s);
 		});
-	}, [system]);
+	}, [system, t]);
 
 	return (
 		<Map system={system}>
@@ -39,7 +43,7 @@ export default function TimetableView({ system }: { system: string }) {
 							<input
 								type="text"
 								className={style.search}
-								placeholder="Search"
+								placeholder={t("search")}
 								onInput={(ev) =>
 									setSearch(ev.currentTarget.value.toLowerCase())
 								}
@@ -56,7 +60,10 @@ export default function TimetableView({ system }: { system: string }) {
 	);
 }
 
-async function stops(system: string): Promise<(search: string) => ReactNode> {
+async function stops(
+	system: string,
+	t: TFunction
+): Promise<(search: string) => ReactNode> {
 	const stops = (await get_stops(system)) ?? [];
 	const groups = new global.Map<string, typeof stops>();
 
@@ -76,7 +83,7 @@ async function stops(system: string): Promise<(search: string) => ReactNode> {
 			.sort(([a, _a], [b, _b]) => cmp([a], [b]));
 
 		if (results.length === 0) {
-			return <p className={style.noresults}>Nie znaleziono przystanków.</p>;
+			return <p className={style.noresults}>{t("no-stops-found")}</p>;
 		}
 
 		return (
