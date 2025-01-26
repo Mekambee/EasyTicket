@@ -34,4 +34,5 @@
 .arrow {
 	margin-left: auto;
 	height: 2rem;
+	color: var(--fg-color);
 }

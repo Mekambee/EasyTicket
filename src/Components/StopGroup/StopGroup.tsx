@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 
 import { VehicleType } from "../../api.ts";
 import { get_stop_icon, get_type_name } from "../../util.ts";
-import unexpand_icon from "../../assets/unexpand.svg";
-import expand_icon from "../../assets/expand.svg";
 import style from "./StopGroup.module.css";
 
 export default function StopGroup({
@@ -35,9 +33,31 @@ export default function StopGroup({
 				</div>
 
 				{expanded ? (
-					<img className={style.arrow} src={unexpand_icon} alt="" />
+					<svg
+						width="48"
+						height="48"
+						viewBox="0 0 48 48"
+						xmlns="http://www.w3.org/2000/svg"
+						className={style.arrow}
+					>
+						<path
+							fill="currentColor"
+							d="m24 26.4 9.2-9.2L36 20 24 32 12 20l2.8-2.8 9.2 9.2Z"
+						/>
+					</svg>
 				) : (
-					<img className={style.arrow} src={expand_icon} alt="" />
+					<svg
+						width="48"
+						height="48"
+						viewBox="0 0 48 48"
+						xmlns="http://www.w3.org/2000/svg"
+						className={style.arrow}
+					>
+						<path
+							fill="currentColor"
+							d="m24 21.6-9.2 9.2L12 28l12-12 12 12-2.8 2.8-9.2-9.2Z"
+						/>
+					</svg>
 				)}
 			</div>
 
