@@ -91,8 +91,6 @@ export default function OuterSiteView() {
             <input
               className={styles.vehicleInput}
               type="text"
-              value="HG924"
-              readOnly
             />
             <div className={styles.popupGrid}>
               <button onClick={() => setVehiclePopupVisible(false)}>{t("cancel")}</button>

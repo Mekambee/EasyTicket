@@ -37,8 +37,6 @@ export default function ActiveTicketCardComponent({ price, time, type, onActivat
             <input
               className={styles.vehicleInput}
               type="text"
-              value="HG924"
-              readOnly
             />
             <div className={styles.popupGrid}>
               <button onClick={() => setVehiclePopupVisible(false)}>{t("cancel")}</button>
